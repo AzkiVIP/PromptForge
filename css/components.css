@@ -515,7 +515,7 @@
   font-size: 13px;
   font-style: normal;
   display: block;
-  text-align: center;
+  text-align: left;
 }
 .output__placeholder strong { color: var(--accent); }
 

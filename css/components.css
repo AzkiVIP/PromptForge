@@ -506,7 +506,7 @@
   font-family: var(--font-mono);
   white-space: pre-wrap;
   word-break: break-word;
-  min-height: 96px;
+  min-height: 72px;
 }
 .output__text--muted { color: var(--text-muted); }
 .output__placeholder {
@@ -514,25 +514,8 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-style: normal;
-  display: block;
-  text-align: center;
 }
 .output__placeholder strong { color: var(--accent); }
-/* Issue #2: When the output block is showing a placeholder (empty state),
-   center it horizontally AND vertically inside the output area. This keeps
-   the placeholder stable across all screen sizes — no left/right shifts
-   when the panel resizes. Uses :has() so no JS changes are needed; falls
-   back gracefully (older browsers just show the placeholder top-left,
-   which was the previous behavior). */
-.output__text:has(.output__placeholder) {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.output__text:has(.output__placeholder) .output__placeholder {
-  text-align: center;
-}
 
 .output__meta {
   display: flex;

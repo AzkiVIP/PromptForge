@@ -27,13 +27,21 @@
     gap: var(--sp-5);
   }
 
-  /* Output panel stops being sticky on tablet */
+  /* Output panel stops being sticky on tablet; both panels return to normal flow */
   .panel-output {
     position: relative;
     top: auto;
     order: 2;
+    max-height: none;
+    overflow-y: visible;
   }
-  .panel-controls { order: 1; }
+  .panel-controls {
+    order: 1;
+    position: relative;
+    top: auto;
+    max-height: none;
+    overflow-y: visible;
+  }
 
   /* Footer simplifies */
   .footer-inner { grid-template-columns: 1fr; gap: var(--sp-6); }

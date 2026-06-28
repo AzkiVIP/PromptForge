@@ -23,6 +23,7 @@
     primaryColor: '#3B82F6',
     secondaryColor: '#1E40AF',
     accentColor: '#93C5FD',
+    colorMode: 'single', // 'single' | 'dual' | 'custom'
     background: null,
     customBackground: '',
     bgImage: null,           // File
@@ -73,6 +74,7 @@
     initSearchables();
     initSubjectSection();
     initColorSection();
+    initColorModeToggle();
     initBackgroundSection();
     initEffectsAndNegative();
     initRatioGrid();
@@ -81,6 +83,7 @@
     initOutputActions();
     initHistoryTabs();
     initCopyButtons();
+    initNavAnchors();
 
     // Restore draft if any
     restoreDraft();
@@ -218,6 +221,81 @@
       preview.style.setProperty('--c2', state.secondaryColor);
       preview.style.setProperty('--c3', state.accentColor);
     }
+  }
+
+  /* ---------- Color mode toggle (Single / Dual / Custom) ---------- */
+  function initColorModeToggle() {
+    const toggle = document.querySelector('.color-mode-toggle');
+    const row = document.getElementById('colorRow');
+    if (!toggle || !row) return;
+
+    toggle.querySelectorAll('.color-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.mode;
+        state.colorMode = mode;
+        toggle.querySelectorAll('.color-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        row.classList.remove('mode-single', 'mode-dual', 'mode-custom');
+        row.classList.add('mode-' + mode);
+        regenerate();
+        saveDraft();
+      });
+    });
+
+    // Apply initial mode from restored draft
+    if (state.colorMode) {
+      const activeBtn = toggle.querySelector('[data-mode="' + state.colorMode + '"]');
+      if (activeBtn) {
+        toggle.querySelectorAll('.color-mode-btn').forEach(b => b.classList.remove('active'));
+        activeBtn.classList.add('active');
+        row.classList.remove('mode-single', 'mode-dual', 'mode-custom');
+        row.classList.add('mode-' + state.colorMode);
+      }
+    }
+  }
+
+  /* ---------- Navbar anchor links (smooth scroll + tab switch) ---------- */
+  function initNavAnchors() {
+    const navLinks = document.querySelectorAll('.header-nav .nav-link[href^="#"]');
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        // If clicking Favorites, switch the right-panel tab to favorites first
+        if (href === '#favorites') {
+          const favTab = document.querySelector('.tab-btn[data-tab="favorites"]');
+          if (favTab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+            favTab.classList.add('tab-active');
+            activeTab = 'favorites';
+            renderHistory();
+          }
+          // Scroll to the history-tabs container (parent) so the section is in view
+          const historySection = document.getElementById('history');
+          if (historySection) {
+            e.preventDefault();
+            historySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return;
+          }
+        }
+        // If clicking History, switch the right-panel tab to history
+        if (href === '#history') {
+          const histTab = document.querySelector('.tab-btn[data-tab="history"]');
+          if (histTab) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-active'));
+            histTab.classList.add('tab-active');
+            activeTab = 'history';
+            renderHistory();
+          }
+        }
+        // Default: smooth scroll
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
   }
 
   /* ---------- Background section ---------- */
@@ -414,6 +492,17 @@
     state.primaryColor = '#3B82F6';
     state.secondaryColor = '#1E40AF';
     state.accentColor = '#93C5FD';
+    state.colorMode = 'single';
+    // Reset color mode toggle UI
+    const toggle = document.querySelector('.color-mode-toggle');
+    const row = document.getElementById('colorRow');
+    if (toggle && row) {
+      toggle.querySelectorAll('.color-mode-btn').forEach(b => b.classList.remove('active'));
+      const singleBtn = toggle.querySelector('[data-mode="single"]');
+      if (singleBtn) singleBtn.classList.add('active');
+      row.classList.remove('mode-single', 'mode-dual', 'mode-custom');
+      row.classList.add('mode-single');
+    }
     updatePalettePreview();
 
     // Reset image previews
@@ -570,6 +659,16 @@
       document.getElementById('secondaryHex').value = state.secondaryColor.toUpperCase();
       document.getElementById('accentColor').value = state.accentColor;
       document.getElementById('accentHex').value = state.accentColor.toUpperCase();
+      // Restore color mode toggle UI
+      const toggle = document.querySelector('.color-mode-toggle');
+      const row = document.getElementById('colorRow');
+      if (toggle && row && state.colorMode) {
+        toggle.querySelectorAll('.color-mode-btn').forEach(b => b.classList.remove('active'));
+        const activeBtn = toggle.querySelector('[data-mode="' + state.colorMode + '"]');
+        if (activeBtn) activeBtn.classList.add('active');
+        row.classList.remove('mode-single', 'mode-dual', 'mode-custom');
+        row.classList.add('mode-' + state.colorMode);
+      }
       updatePalettePreview();
       global.PFUI.toast('Draft restored', 'success');
     } catch (err) {

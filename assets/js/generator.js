@@ -225,9 +225,10 @@
   /* ---------- Build color description ---------- */
   function buildColorPhrase(state) {
     const parts = [];
+    const mode = state.colorMode || 'custom';
     if (state.primaryColor) parts.push('primary ' + state.primaryColor);
-    if (state.secondaryColor) parts.push('secondary ' + state.secondaryColor);
-    if (state.accentColor) parts.push('accent ' + state.accentColor);
+    if (mode !== 'single' && state.secondaryColor) parts.push('secondary ' + state.secondaryColor);
+    if (mode === 'custom' && state.accentColor) parts.push('accent ' + state.accentColor);
     if (state.palette && state.palette.label) parts.unshift(state.palette.label.toLowerCase() + ' palette');
     return parts.length ? parts.join(', ') + ' color scheme' : '';
   }

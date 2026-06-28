@@ -295,6 +295,27 @@
       });
     }
 
+    /* ---------- Combobox chevron ---------- */
+    let chevronBtn = null;
+    function ensureChevron() {
+      if (chevronBtn) return;
+      const wrap = rootEl.querySelector('.search-input-wrap');
+      if (!wrap) return;
+      chevronBtn = document.createElement('button');
+      chevronBtn.type = 'button';
+      chevronBtn.className = 'search-chevron';
+      chevronBtn.setAttribute('aria-label', 'Toggle dropdown');
+      chevronBtn.innerHTML =
+        '<svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">' +
+          '<path d="M2 4l4 4 4-4"/>' +
+        '</svg>';
+      chevronBtn.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+        toggle();
+      });
+      wrap.appendChild(chevronBtn);
+    }
+
     /* ---------- Open/close ---------- */
     function open() {
       rootEl.classList.add('open');
@@ -302,6 +323,15 @@
     }
     function close() {
       rootEl.classList.remove('open');
+    }
+    function toggle() {
+      if (rootEl.classList.contains('open')) {
+        close();
+        input.blur();
+      } else {
+        input.focus();
+        open();
+      }
     }
 
     /* ---------- Keyboard navigation ---------- */
@@ -320,7 +350,28 @@
       items[idx].scrollIntoView({ block: 'nearest' });
     }
 
+    ensureChevron();
+
     input.addEventListener('focus', open);
+    // Click anywhere in the input wrap toggles the dropdown (combobox feel)
+    const wrap = rootEl.querySelector('.search-input-wrap');
+    if (wrap) {
+      wrap.addEventListener('mousedown', (e) => {
+        // Ignore clicks on the chevron button (it has its own handler)
+        if (e.target.closest('.search-chevron')) return;
+        if (!rootEl.classList.contains('open')) {
+          // Let focus happen naturally, then ensure open
+          setTimeout(open, 0);
+        } else {
+          // Already open — clicking input text shouldn't close, but
+          // clicking on the empty area of the wrap should toggle.
+          if (e.target !== input) {
+            e.preventDefault();
+            toggle();
+          }
+        }
+      });
+    }
     input.addEventListener('input', () => {
       selectedItem = null;
       let tag = rootEl.querySelector('.search-selected');
@@ -366,7 +417,7 @@
       input: input,
       setValue(item) { if (item) select(item); else clearSelection(); },
       getValue() { return selectedItem; },
-      open, close,
+      open, close, toggle,
       refresh() { render(input.value); }
     };
     rootEl._pfSearch = api;

@@ -155,14 +155,14 @@ Then open <http://localhost:8000> in your browser.
 PromptForge is ready to deploy to GitHub Pages with zero configuration.
 
 ### Steps
-1. Create a new repository on GitHub (e.g. `promptforge`).
+1. The official repository is [`https://github.com/AzkiVIP/PromptForge`](https://github.com/AzkiVIP/PromptForge). You can deploy your own copy by creating a new repository on GitHub (e.g. `promptforge`).
 2. Push the project files to the `main` branch:
    ```bash
    git init
    git add .
    git commit -m "Initial PromptForge release"
    git branch -M main
-   git remote add origin https://github.com/<your-username>/promptforge.git
+   git remote add origin https://github.com/AzkiVIP/PromptForge.git
    git push -u origin main
    ```
 3. In GitHub, go to **Settings → Pages**.
@@ -171,7 +171,7 @@ PromptForge is ready to deploy to GitHub Pages with zero configuration.
 6. Click **Save**.
 7. Wait 1–2 minutes. Your site will be live at:
    ```
-   https://<your-username>.github.io/promptforge/
+   https://AzkiVIP.github.io/PromptForge/
    ```
 
 ### Important notes for GitHub Pages
@@ -365,4 +365,4 @@ You are free to use, modify, distribute, and commercialize this project. Attribu
 
 ---
 
-*If PromptForge saved you time, consider starring the repository on GitHub — it helps others discover the tool.*
+*If PromptForge saved you time, consider starring [the repository on GitHub](https://github.com/AzkiVIP/PromptForge) — it helps others discover the tool.*

@@ -47,9 +47,15 @@
 
     async load(name) {
       // If path is dotted like "presets.cameraAngles", load the base file
-      const base = name.includes('.') ? name.split('.')[0] : name;
-      const data = await fetchJSON(base);
-      return resolvePath(data, name);
+      // but skip the base segment when resolving (the JSON file IS the base).
+      if (name.includes('.')) {
+        const parts = name.split('.');
+        const base = parts[0];
+        const subPath = parts.slice(1).join('.');
+        const data = await fetchJSON(base);
+        return resolvePath(data, subPath);
+      }
+      return fetchJSON(name);
     },
 
     /* Convenience loaders for each known dataset */

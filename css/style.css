@@ -66,7 +66,10 @@
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -144,7 +147,9 @@ a { color: inherit; text-decoration: none; }
 .nav { display: flex; gap: var(--sp-1); margin-left: auto; }
 .nav--desktop { display: flex; gap: var(--sp-1); margin-left: auto; }
 .nav--mobile {
-  /* Mobile drawer — hidden by default, shown when .is-open is applied. */
+  /* Mobile drawer — completely removed from layout when closed (display:none)
+     so it cannot extend the document's scrollable width. When .is-open is
+     added, it becomes display:flex and plays a slide-in keyframe animation. */
   display: none;
   position: fixed;
   top: var(--navbar-h);
@@ -158,12 +163,15 @@ a { color: inherit; text-decoration: none; }
   border-left: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   z-index: 60;
-  transform: translateX(100%);
-  transition: transform 280ms var(--ease);
   overflow-y: auto;
 }
 .nav--mobile.is-open {
-  transform: translateX(0);
+  display: flex;
+  animation: nav-drawer-slide-in 280ms var(--ease);
+}
+@keyframes nav-drawer-slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
 }
 .nav__link {
   position: relative;
@@ -240,7 +248,14 @@ a { color: inherit; text-decoration: none; }
   opacity: 1;
 }
 
-.navbar__actions { display: flex; align-items: center; gap: var(--sp-2); }
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  /* Issue #1: when desktop nav is hidden on mobile, push the actions
+     (hamburger) to the far right of the navbar. */
+  margin-left: auto;
+}
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -376,10 +391,17 @@ a { color: inherit; text-decoration: none; }
 .footer__brand { display: flex; align-items: center; gap: var(--sp-3); }
 .footer__title { font-weight: 700; font-size: 14px; }
 .footer__sub { font-size: 12px; color: var(--text-muted); }
-.footer__links { display: flex; gap: var(--sp-4); justify-content: center; }
+.footer__links {
+  display: flex;
+  gap: var(--sp-5);
+  justify-content: center;
+  flex-wrap: wrap;
+}
 .footer__links a {
   color: var(--text-muted);
   font-size: 13px;
+  font-weight: 500;
+  padding: 6px 4px;
   transition: color var(--dur) var(--ease);
 }
 .footer__links a:hover { color: var(--accent); }

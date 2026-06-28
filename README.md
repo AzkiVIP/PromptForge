@@ -1,10 +1,17 @@
-# PromptForge
+<div align="center">
+  <a href="https://azkivip.github.io/PromptForge/">
+    <img src="assets/logo-cropped.png" alt="PromptForge" width="80" height="80" />
+  </a>
+  <h1>PromptForge</h1>
+  <p><strong>Premium Visual Prompt Generator</strong></p>
+  <p>
+    <img src="https://img.shields.io/badge/Open_Source-3B82F6?style=flat-square" alt="Open Source" />
+    <img src="https://img.shields.io/badge/Vanilla_HTML_%2F_CSS_%2F_JS-1E293B?style=flat-square" alt="Vanilla HTML / CSS / JS" />
+    <img src="https://img.shields.io/badge/GitHub_Pages_Ready-10B981?style=flat-square" alt="GitHub Pages Ready" />
+  </p>
+</div>
 
-<p align="center">
-  <img src="assets/banner.png" alt="PromptForge — Premium Visual Prompt Generator" width="640" />
-</p>
-
-> Premium open-source visual prompt generator. Craft cinematic, professional prompts for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.
+> Craft cinematic, professional prompts for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.
 
 Built with **HTML5, CSS3, and Vanilla JavaScript** — no frameworks, no build step, no dependencies. Just open `index.html` or host the folder on GitHub Pages.
 
@@ -50,14 +57,13 @@ PromptForge/
 │   ├── history.js          # LocalStorage history & favorites
 │   └── app.js              # Main wiring & UI behavior (incl. mobile nav)
 └── assets/
-    ├── logo-cropped.png    # Tightest crop of the official logo (no padding)
+    ├── logo-cropped.png    # Tightest crop of the official logo (used in navbar, footer, README)
     ├── logo-192.png        # 192×192 PWA icon (icon fills ~87% of canvas)
     ├── logo-512.png        # 512×512 PWA splash icon
     ├── logo.png            # Alias of logo-512.png (legacy references)
     ├── favicon.png         # 64×64 PNG favicon
     ├── favicon.ico         # Multi-resolution ICO (16, 32, 48)
-    ├── og-image.png        # 1200×630 social preview image
-    └── banner.png          # 1280×320 README banner
+    └── og-image.png        # 1200×630 social preview image
 ```
 
 ---

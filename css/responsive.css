@@ -42,20 +42,26 @@
 
   /* === Issue #1: Mobile navigation ===
      Hide desktop nav links + GitHub button; show hamburger toggle.
-     Mobile drawer becomes visible (animated via .is-open on toggle). */
+     The mobile drawer itself stays display:none until .is-open is added
+     (see .nav--mobile rule in style.css). This guarantees the off-canvas
+     drawer never extends the document's scrollable width. */
   .nav--desktop { display: none; }
   .navbar__github { display: none; }
   .nav-toggle {
     display: inline-flex;
   }
-  /* Mobile drawer is rendered (no longer display:none) but slides off-canvas
-     via transform: translateX(100%). When .is-open is added it slides in. */
-  .nav--mobile {
-    display: flex;
-  }
 
-  .footer__inner { grid-template-columns: 1fr; text-align: center; gap: var(--sp-3); }
-  .footer__links { justify-content: center; }
+  .footer__inner { grid-template-columns: 1fr; text-align: center; gap: var(--sp-4); }
+  .footer__links {
+    justify-content: center;
+    /* Increase separation between GitHub / Issues / License on tablet/mobile */
+    gap: var(--sp-6);
+    flex-wrap: wrap;
+  }
+  .footer__links a {
+    font-size: 13.5px;
+    padding: 8px 6px;
+  }
   .footer__copy { text-align: center; }
 }
 
@@ -92,6 +98,15 @@
   .accordion__body > .previews { padding: 0 12px; }
 
   .history__body { max-height: none; }
+
+  /* Issue: Footer — generous spacing on phones for readability */
+  .footer__inner { padding: var(--sp-5) var(--sp-4); gap: var(--sp-5); }
+  .footer__links {
+    gap: var(--sp-5);
+    /* Each link on its own breathing room */
+    flex-wrap: wrap;
+  }
+  .footer__links a { font-size: 14px; padding: 10px 8px; }
 
   .toast { bottom: 16px; left: 12px; right: 12px; transform: translateY(20px); max-width: none; }
   .toast.is-visible { transform: translateY(0); }

@@ -1,0 +1,67 @@
+{
+  "categories": [
+    {
+      "name": "Gaming",
+      "icon": "gamepad",
+      "items": [
+        { "id": "minecraft", "label": "Minecraft", "aliases": ["mc", "mine", "block"] },
+        { "id": "minecraft-thumbnail", "label": "Minecraft Thumbnail", "aliases": ["mc thumb"] },
+        { "id": "minecraft-render", "label": "Minecraft Render", "aliases": ["mc render"] },
+        { "id": "roblox", "label": "Roblox", "aliases": ["rbx"] },
+        { "id": "valorant", "label": "Valorant", "aliases": ["val"] },
+        { "id": "fortnite", "label": "Fortnite", "aliases": ["fn"] },
+        { "id": "pubg", "label": "PUBG", "aliases": [] },
+        { "id": "rpg", "label": "RPG", "aliases": ["role playing"] },
+        { "id": "mmorpg", "label": "MMORPG", "aliases": ["mmo"] }
+      ]
+    },
+    {
+      "name": "Content Creator",
+      "icon": "video",
+      "items": [
+        { "id": "thumbnail", "label": "Thumbnail", "aliases": ["thumb"] },
+        { "id": "youtube-banner", "label": "YouTube Banner", "aliases": ["yt banner"] },
+        { "id": "stream-overlay", "label": "Stream Overlay", "aliases": ["overlay"] }
+      ]
+    },
+    {
+      "name": "Marketing",
+      "icon": "megaphone",
+      "items": [
+        { "id": "product", "label": "Product", "aliases": [] },
+        { "id": "promotion", "label": "Promotion", "aliases": ["promo"] },
+        { "id": "advertisement", "label": "Advertisement", "aliases": ["ad"] }
+      ]
+    },
+    {
+      "name": "Events",
+      "icon": "calendar",
+      "items": [
+        { "id": "seminar", "label": "Seminar", "aliases": [] },
+        { "id": "webinar", "label": "Webinar", "aliases": [] },
+        { "id": "festival", "label": "Festival", "aliases": [] },
+        { "id": "competition", "label": "Competition", "aliases": ["contest"] },
+        { "id": "concert", "label": "Concert", "aliases": [] }
+      ]
+    },
+    {
+      "name": "Creative",
+      "icon": "palette",
+      "items": [
+        { "id": "movie-poster", "label": "Movie Poster", "aliases": ["film"] },
+        { "id": "album-cover", "label": "Album Cover", "aliases": ["album"] },
+        { "id": "wallpaper", "label": "Wallpaper", "aliases": ["desktop"] },
+        { "id": "book-cover", "label": "Book Cover", "aliases": ["book"] }
+      ]
+    },
+    {
+      "name": "Business",
+      "icon": "briefcase",
+      "items": [
+        { "id": "startup", "label": "Startup", "aliases": [] },
+        { "id": "portfolio", "label": "Portfolio", "aliases": [] },
+        { "id": "corporate", "label": "Corporate", "aliases": [] }
+      ]
+    }
+  ]
+}

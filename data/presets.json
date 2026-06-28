@@ -1,0 +1,118 @@
+{
+  "cameraAngles": [
+    { "id": "front-view", "label": "Front View", "aliases": [] },
+    { "id": "back-view", "label": "Back View", "aliases": [] },
+    { "id": "side-view", "label": "Side View", "aliases": [] },
+    { "id": "top-view", "label": "Top View", "aliases": [] },
+    { "id": "bottom-view", "label": "Bottom View", "aliases": [] },
+    { "id": "high-angle", "label": "High Angle", "aliases": [] },
+    { "id": "low-angle", "label": "Low Angle", "aliases": [] },
+    { "id": "bird-eye-view", "label": "Bird Eye View", "aliases": ["birds eye", "aerial"] },
+    { "id": "worm-eye-view", "label": "Worm Eye View", "aliases": ["worms eye"] },
+    { "id": "dutch-angle", "label": "Dutch Angle", "aliases": ["tilted"] },
+    { "id": "close-up", "label": "Close Up", "aliases": ["closeup"] },
+    { "id": "extreme-close-up", "label": "Extreme Close Up", "aliases": [] },
+    { "id": "medium-shot", "label": "Medium Shot", "aliases": [] },
+    { "id": "full-body-shot", "label": "Full Body Shot", "aliases": ["full body"] },
+    { "id": "wide-shot", "label": "Wide Shot", "aliases": ["wide angle"] },
+    { "id": "over-shoulder", "label": "Over Shoulder", "aliases": ["over the shoulder"] },
+    { "id": "action-shot", "label": "Action Shot", "aliases": ["action"] },
+    { "id": "hero-shot", "label": "Hero Shot", "aliases": ["hero"] },
+    { "id": "cinematic-perspective", "label": "Cinematic Perspective", "aliases": ["cinematic"] }
+  ],
+  "lighting": [
+    { "id": "daylight", "label": "Daylight", "aliases": ["natural"] },
+    { "id": "sunrise", "label": "Sunrise", "aliases": ["dawn"] },
+    { "id": "sunset", "label": "Sunset", "aliases": ["dusk"] },
+    { "id": "golden-hour", "label": "Golden Hour", "aliases": ["golden"] },
+    { "id": "studio-light", "label": "Studio Light", "aliases": ["studio"] },
+    { "id": "softbox", "label": "Softbox", "aliases": [] },
+    { "id": "volumetric-light", "label": "Volumetric Light", "aliases": ["volumetric"] },
+    { "id": "rim-light", "label": "Rim Light", "aliases": ["rim"] },
+    { "id": "back-light", "label": "Back Light", "aliases": ["backlight"] },
+    { "id": "neon-light", "label": "Neon Light", "aliases": ["neon"] },
+    { "id": "cyberpunk-light", "label": "Cyberpunk Light", "aliases": ["cyber light"] },
+    { "id": "moonlight", "label": "Moonlight", "aliases": ["moon"] },
+    { "id": "dark-shadows", "label": "Dark Shadows", "aliases": ["shadow"] },
+    { "id": "flashlight-horror", "label": "Flashlight Horror", "aliases": ["flashlight"] }
+  ],
+  "backgrounds": [
+    { "id": "city", "label": "City", "aliases": ["urban"] },
+    { "id": "cyberpunk-city", "label": "Cyberpunk City", "aliases": ["cyber city"] },
+    { "id": "forest", "label": "Forest", "aliases": ["woods"] },
+    { "id": "space", "label": "Space", "aliases": ["cosmos", "galaxy"] },
+    { "id": "castle", "label": "Castle", "aliases": ["fortress"] },
+    { "id": "minecraft-world", "label": "Minecraft World", "aliases": ["mc world"] },
+    { "id": "cave", "label": "Cave", "aliases": ["cavern"] },
+    { "id": "abstract-shapes", "label": "Abstract Shapes", "aliases": ["abstract"] },
+    { "id": "studio-background", "label": "Studio Background", "aliases": ["studio bg"] }
+  ],
+  "effects": [
+    { "id": "particles", "label": "Particles", "aliases": [] },
+    { "id": "smoke", "label": "Smoke", "aliases": [] },
+    { "id": "fire", "label": "Fire", "aliases": ["flame"] },
+    { "id": "rain", "label": "Rain", "aliases": [] },
+    { "id": "lightning", "label": "Lightning", "aliases": ["thunder"] },
+    { "id": "glitch", "label": "Glitch", "aliases": ["distortion"] },
+    { "id": "motion-blur", "label": "Motion Blur", "aliases": ["motion"] },
+    { "id": "dust", "label": "Dust", "aliases": [] },
+    { "id": "fog", "label": "Fog", "aliases": ["mist"] },
+    { "id": "magic-energy", "label": "Magic Energy", "aliases": ["magic"] },
+    { "id": "floating-debris", "label": "Floating Debris", "aliases": ["debris"] }
+  ],
+  "negativePrompts": [
+    { "id": "blur", "label": "Blur", "aliases": ["blurry"] },
+    { "id": "low-quality", "label": "Low Quality", "aliases": ["low res"] },
+    { "id": "watermark", "label": "Watermark", "aliases": [] },
+    { "id": "noise", "label": "Noise", "aliases": ["noisy"] },
+    { "id": "bad-anatomy", "label": "Bad Anatomy", "aliases": ["anatomy"] },
+    { "id": "extra-fingers", "label": "Extra Fingers", "aliases": ["fingers"] },
+    { "id": "deformed-hands", "label": "Deformed Hands", "aliases": ["hands"] },
+    { "id": "distorted-face", "label": "Distorted Face", "aliases": ["face"] }
+  ],
+  "palettes": [
+    { "id": "blue", "label": "Blue", "primary": "#3B82F6", "secondary": "#1E40AF", "accent": "#93C5FD" },
+    { "id": "red", "label": "Red", "primary": "#EF4444", "secondary": "#991B1B", "accent": "#FCA5A5" },
+    { "id": "green", "label": "Green", "primary": "#22C55E", "secondary": "#166534", "accent": "#86EFAC" },
+    { "id": "purple", "label": "Purple", "primary": "#A855F7", "secondary": "#6B21A8", "accent": "#D8B4FE" },
+    { "id": "orange", "label": "Orange", "primary": "#F97316", "secondary": "#9A3412", "accent": "#FDBA74" },
+    { "id": "black-gold", "label": "Black Gold", "primary": "#0F172A", "secondary": "#D4AF37", "accent": "#FDE68A" },
+    { "id": "monochrome", "label": "Monochrome", "primary": "#FFFFFF", "secondary": "#64748B", "accent": "#94A3B8" },
+    { "id": "cyber-neon", "label": "Cyber Neon", "primary": "#00F5FF", "secondary": "#FF00E5", "accent": "#FFE600" }
+  ],
+  "aspectRatios": [
+    { "id": "1:1", "label": "1:1 Square", "w": 1, "h": 1 },
+    { "id": "4:5", "label": "4:5 Portrait", "w": 4, "h": 5 },
+    { "id": "16:9", "label": "16:9 Widescreen", "w": 16, "h": 9 },
+    { "id": "9:16", "label": "9:16 Story", "w": 9, "h": 16 },
+    { "id": "2:3", "label": "2:3 Portrait", "w": 2, "h": 3 },
+    { "id": "A4", "label": "A4 Print", "w": 210, "h": 297 },
+    { "id": "A3", "label": "A3 Print", "w": 297, "h": 420 }
+  ],
+  "compositions": [
+    { "id": "center-focus", "label": "Center Focus", "aliases": [] },
+    { "id": "rule-of-thirds", "label": "Rule of Thirds", "aliases": ["thirds"] },
+    { "id": "symmetrical", "label": "Symmetrical", "aliases": ["symmetry"] },
+    { "id": "dynamic-layout", "label": "Dynamic Layout", "aliases": ["dynamic"] },
+    { "id": "minimalist", "label": "Minimalist", "aliases": ["minimal"] }
+  ],
+  "renderingQuality": [
+    { "id": "standard", "label": "Standard" },
+    { "id": "high", "label": "High" },
+    { "id": "ultra", "label": "Ultra" },
+    { "id": "masterpiece", "label": "Masterpiece" }
+  ],
+  "aiPresets": [
+    { "id": "chatgpt-images", "label": "ChatGPT Images" },
+    { "id": "flux", "label": "Flux" },
+    { "id": "sdxl", "label": "SDXL" },
+    { "id": "midjourney", "label": "Midjourney" },
+    { "id": "gemini", "label": "Gemini" }
+  ],
+  "promptExpansions": [
+    { "id": "short", "label": "Short" },
+    { "id": "medium", "label": "Medium" },
+    { "id": "detailed", "label": "Detailed" },
+    { "id": "extreme", "label": "Extreme" }
+  ]
+}

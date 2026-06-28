@@ -1,0 +1,25 @@
+{
+  "moods": [
+    { "id": "epic", "label": "Epic", "aliases": ["grand", "heroic"] },
+    { "id": "professional", "label": "Professional", "aliases": ["pro", "business"] },
+    { "id": "luxury", "label": "Luxury", "aliases": ["premium", "elegant"] },
+    { "id": "energetic", "label": "Energetic", "aliases": ["dynamic", "active"] },
+    { "id": "friendly", "label": "Friendly", "aliases": ["warm", "approachable"] },
+    { "id": "mysterious", "label": "Mysterious", "aliases": ["enigmatic"] },
+    { "id": "dark", "label": "Dark", "aliases": ["moody"] },
+    { "id": "horror", "label": "Horror", "aliases": ["scary", "creepy"] },
+    { "id": "emotional", "label": "Emotional", "aliases": ["sentimental"] },
+    { "id": "dramatic", "label": "Dramatic", "aliases": ["theatrical"] },
+    { "id": "futuristic", "label": "Futuristic", "aliases": ["future", "sci-fi"] }
+  ],
+  "typography": [
+    { "id": "modern", "label": "Modern", "aliases": ["contemporary"] },
+    { "id": "bold", "label": "Bold", "aliases": ["heavy"] },
+    { "id": "minimalist", "label": "Minimalist", "aliases": ["clean", "minimal"] },
+    { "id": "luxury", "label": "Luxury", "aliases": ["elegant"] },
+    { "id": "corporate", "label": "Corporate", "aliases": ["business"] },
+    { "id": "esports", "label": "Esports", "aliases": ["gaming"] },
+    { "id": "minecraft-pixel", "label": "Minecraft Pixel", "aliases": ["mc pixel"] },
+    { "id": "futuristic", "label": "Futuristic", "aliases": ["sci-fi"] }
+  ]
+}

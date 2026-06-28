@@ -1,0 +1,140 @@
+/* ==========================================================================
+   PromptForge · responsive.css
+   Mobile-first breakpoints. Two-column on desktop, single column on tablet,
+   accordion-style collapsible sections on mobile.
+   ========================================================================== */
+
+/* ---------- Large desktop (default in main.css + components.css) ---------- */
+@media (min-width: 1025px) {
+  .generator-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+/* ---------- Tablet (<= 1024px) ---------- */
+@media (max-width: 1024px) {
+  :root {
+    --sp-16: 48px;
+    --sp-12: 40px;
+  }
+
+  .container { padding-inline: var(--sp-5); }
+
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .generator-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-5);
+  }
+
+  /* Output panel stops being sticky on tablet */
+  .panel-output {
+    position: relative;
+    top: auto;
+    order: 2;
+  }
+  .panel-controls { order: 1; }
+
+  /* Footer simplifies */
+  .footer-inner { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .footer-cols { grid-template-columns: repeat(3, 1fr); }
+
+  .hero-title { font-size: clamp(1.75rem, 4vw, 2.25rem); }
+  .hero-subtitle { font-size: var(--fs-base); }
+}
+
+/* ---------- Mobile (<= 640px) ---------- */
+@media (max-width: 640px) {
+  :root {
+    --header-h: 56px;
+  }
+
+  .container { padding-inline: var(--sp-4); }
+
+  /* Header nav: hide text links, keep CTA only */
+  .header-nav .nav-link:not(.nav-link-cta) { display: none; }
+  .brand-name { font-size: var(--fs-md); }
+  .brand-logo { width: 32px; height: 32px; }
+
+  /* Hero */
+  .hero { padding: var(--sp-10) 0 var(--sp-8); }
+  .hero-badge { font-size: var(--fs-xs); padding: var(--sp-2) var(--sp-3); }
+  .hero-title { font-size: clamp(1.6rem, 6vw, 2rem); }
+  .hero-subtitle { font-size: var(--fs-sm); }
+  .hero-logo { width: 88px; height: 88px; }
+  .hero-actions { flex-direction: column; width: 100%; }
+  .hero-actions .btn { width: 100%; }
+
+  /* Features stack 1 column */
+  .features-grid { grid-template-columns: 1fr; }
+  .feature-card { padding: var(--sp-4); }
+
+  /* Panel padding tighter */
+  .panel { padding: var(--sp-4); border-radius: var(--r-lg); }
+
+  /* All field sections become collapsible accordions by default on mobile */
+  .section-header { padding: var(--sp-3) var(--sp-4); }
+  .section-title { font-size: var(--fs-base); }
+  .section-body { padding: 0 var(--sp-4) var(--sp-4); }
+
+  /* Collapse all sections by default on mobile (JS will set aria-expanded=false) */
+  .mobile-collapsed .section-body { display: none; }
+  .mobile-collapsed .section-header .chevron { transform: rotate(-135deg); margin-top: 3px; }
+
+  /* Advanced grid single column */
+  .advanced-grid { grid-template-columns: 1fr; }
+
+  /* Color row single column */
+  .color-row { grid-template-columns: 1fr; }
+
+  /* Output actions stack */
+  .output-actions { grid-template-columns: 1fr; }
+
+  /* Output box shorter */
+  .output-box { min-height: 100px; max-height: 220px; }
+
+  /* Footer cols stack */
+  .footer-cols { grid-template-columns: 1fr; gap: var(--sp-4); }
+  .footer-bottom .container { flex-direction: column; gap: var(--sp-2); text-align: center; }
+
+  /* Search results show full width below input */
+  .search-results { max-height: 240px; }
+
+  /* History tabs smaller */
+  .tab-btn { padding: var(--sp-2) var(--sp-1); font-size: 10px; }
+  .history-list { max-height: 320px; }
+
+  /* Reduce some motion for users who prefer reduced motion */
+  .live-dot { animation: none; }
+}
+
+/* ---------- Small mobile (<= 380px) ---------- */
+@media (max-width: 380px) {
+  .container { padding-inline: var(--sp-3); }
+  .panel { padding: var(--sp-3); }
+  .ratio-grid { grid-template-columns: repeat(2, 1fr); }
+  .palette-grid { grid-template-columns: 1fr; }
+  .image-preview-grid { grid-template-columns: repeat(3, 1fr); }
+  .brand-logo { width: 28px; height: 28px; }
+  .hero-logo { width: 76px; height: 76px; }
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .live-dot { animation: none; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .site-header, .site-footer, .hero-actions, .output-actions, .history-tabs, .history-list,
+  .advanced-toggle, .advanced-panel, .dropzone, .image-preview-grid { display: none !important; }
+  body { background: #fff; color: #000; }
+  .panel { border: 1px solid #ccc; box-shadow: none; }
+  .output-box { background: #fff; color: #000; border: 1px solid #ccc; }
+}

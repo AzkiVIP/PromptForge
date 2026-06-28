@@ -1,0 +1,10 @@
+# PromptForge - robots.txt
+# https://promptforge.example.com/
+
+User-agent: *
+Allow: /
+
+# Disallow nothing — this is a fully static, public tool.
+# Asset folders are also crawlable so search engines can index icons/manifest.
+
+Sitemap: https://promptforge.example.com/sitemap.xml

@@ -1,0 +1,52 @@
+{
+  "categories": [
+    {
+      "name": "Realism",
+      "items": [
+        { "id": "photorealistic", "label": "Photorealistic", "aliases": ["photo", "real"] },
+        { "id": "hyperrealistic", "label": "Hyperrealistic", "aliases": ["hyper"] },
+        { "id": "cinematic", "label": "Cinematic", "aliases": ["cinema"] }
+      ]
+    },
+    {
+      "name": "3D",
+      "items": [
+        { "id": "blender-render", "label": "Blender Render", "aliases": ["blender"] },
+        { "id": "octane-render", "label": "Octane Render", "aliases": ["octane"] },
+        { "id": "stylized-3d", "label": "Stylized 3D", "aliases": [] },
+        { "id": "pixar-style", "label": "Pixar Style", "aliases": ["pixar"] }
+      ]
+    },
+    {
+      "name": "Anime",
+      "items": [
+        { "id": "anime", "label": "Anime", "aliases": [] },
+        { "id": "manga", "label": "Manga", "aliases": [] }
+      ]
+    },
+    {
+      "name": "Gaming",
+      "items": [
+        { "id": "minecraft-style", "label": "Minecraft Style", "aliases": ["mc style"] },
+        { "id": "roblox-style", "label": "Roblox Style", "aliases": ["rbx style"] },
+        { "id": "low-poly", "label": "Low Poly", "aliases": ["lowpoly"] }
+      ]
+    },
+    {
+      "name": "Fantasy",
+      "items": [
+        { "id": "dark-fantasy", "label": "Dark Fantasy", "aliases": ["darkfantasy"] },
+        { "id": "medieval-fantasy", "label": "Medieval Fantasy", "aliases": ["medieval"] }
+      ]
+    },
+    {
+      "name": "Sci-Fi",
+      "items": [
+        { "id": "cyberpunk", "label": "Cyberpunk", "aliases": ["cyber"] },
+        { "id": "cyberpunk-city", "label": "Cyberpunk City", "aliases": ["cyber city"] },
+        { "id": "futuristic", "label": "Futuristic", "aliases": ["future"] },
+        { "id": "space", "label": "Space", "aliases": ["cosmos"] }
+      ]
+    }
+  ]
+}

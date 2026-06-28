@@ -5,578 +5,526 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#0F172A" />
 
-  <!-- Primary Meta Tags -->
-  <title>PromptForge - Professional Visual Prompt Generator</title>
-  <meta name="title" content="PromptForge - Professional Visual Prompt Generator" />
-  <meta name="description" content="Generate professional prompts for posters, thumbnails, advertisements, covers, artworks, wallpapers, and visual design projects." />
-  <meta name="keywords" content="prompt generator, AI art, poster design, thumbnail, midjourney, sdxl, flux, prompt engineering" />
+  <!-- Primary Meta -->
+  <title>PromptForge — Premium Visual Prompt Generator</title>
+  <meta name="description" content="PromptForge is a premium, open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation." />
+  <meta name="keywords" content="prompt generator, AI prompt, image prompt, midjourney prompt, sdxl prompt, flux prompt, poster prompt, thumbnail prompt, concept art prompt" />
   <meta name="author" content="PromptForge" />
-  <link rel="canonical" href="https://promptforge.example.com/" />
+  <link rel="canonical" href="https://azkivip.github.io/PromptForge/" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://promptforge.example.com/" />
-  <meta property="og:title" content="PromptForge - Professional Visual Prompt Generator" />
-  <meta property="og:description" content="Generate professional prompts for posters, thumbnails, advertisements, covers, artworks, wallpapers, and visual design projects." />
-  <meta property="og:image" content="assets/images/og-cover.png" />
+  <meta property="og:title" content="PromptForge — Premium Visual Prompt Generator" />
+  <meta property="og:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation. Rule-based engine. No AI APIs." />
+  <meta property="og:url" content="https://azkivip.github.io/PromptForge/" />
+  <meta property="og:image" content="https://azkivip.github.io/PromptForge/assets/og-image.svg" />
+  <meta property="og:site_name" content="PromptForge" />
 
-  <!-- Twitter Cards -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://promptforge.example.com/" />
-  <meta name="twitter:title" content="PromptForge - Professional Visual Prompt Generator" />
-  <meta name="twitter:description" content="Generate professional prompts for posters, thumbnails, advertisements, covers, artworks, wallpapers, and visual design projects." />
-  <meta name="twitter:image" content="assets/images/og-cover.png" />
+  <meta name="twitter:title" content="PromptForge — Premium Visual Prompt Generator" />
+  <meta name="twitter:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation." />
+  <meta name="twitter:image" content="https://azkivip.github.io/PromptForge/assets/og-image.svg" />
+  <meta name="twitter:creator" content="@AzkiVIP" />
 
-  <!-- PWA / Icons -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/favicon.svg" />
   <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/icon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/icon-16.png" />
-  <link rel="icon" type="image/png" sizes="48x48" href="assets/icons/icon-48.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="fluid-icon" href="assets/images/logo-512.png" title="PromptForge" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <link rel="stylesheet" href="assets/css/components.css" />
-  <link rel="stylesheet" href="assets/css/responsive.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     "name": "PromptForge",
-    "description": "Professional Visual Prompt Generator for posters, thumbnails, advertisements, covers, artworks, wallpapers, and visual design projects.",
     "applicationCategory": "DesignApplication",
-    "operatingSystem": "All",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "url": "https://promptforge.example.com/",
-    "logo": "https://promptforge.example.com/assets/images/logo-512.png",
-    "image": "https://promptforge.example.com/assets/images/og-cover.png"
+    "operatingSystem": "Any",
+    "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.",
+    "url": "https://azkivip.github.io/PromptForge/",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "PromptForge",
+      "url": "https://github.com/AzkiVIP/PromptForge"
+    }
   }
   </script>
 </head>
 <body>
-  <!-- ========== HEADER ========== -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="brand" aria-label="PromptForge Home">
-        <img src="assets/images/logo.png" alt="PromptForge logo" class="brand-logo" width="36" height="36" decoding="async" fetchpriority="high" />
-        <span class="brand-name">Prompt<span class="accent">Forge</span></span>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" role="banner">
+    <div class="navbar__inner">
+      <a href="#" class="brand" aria-label="PromptForge home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="26" height="26" rx="6" fill="#3B82F6"/>
+            <path d="M11 22V10h5.2c2.9 0 4.8 1.6 4.8 4.2 0 2.6-1.9 4.3-4.8 4.3H14V22h-3Zm3-6.3h2c1.3 0 2.1-.7 2.1-1.5 0-.9-.8-1.5-2.1-1.5h-2v3Z" fill="#0F172A"/>
+            <circle cx="23.5" cy="9.5" r="1.8" fill="#F8FAFC"/>
+          </svg>
+        </span>
+        <span class="brand__name">Prompt<span class="brand__accent">Forge</span></span>
       </a>
 
-      <nav class="header-nav" aria-label="Primary">
-        <a href="#generator" class="nav-link">Generator</a>
-        <a href="#history" class="nav-link">History</a>
-        <a href="#favorites" class="nav-link">Favorites</a>
-        <a href="https://github.com/AzkiVIP/PromptForge" target="_blank" rel="noopener" class="nav-link nav-link-cta">
-          <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-          </svg>
-          GitHub
-        </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#generator" class="nav__link" data-nav="generator">Generator</a>
+        <a href="#history" class="nav__link" data-nav="history">History</a>
+        <a href="#favorites" class="nav__link" data-nav="favorites">Favorites</a>
       </nav>
+
+      <div class="navbar__actions">
+        <a class="btn btn--ghost btn--sm" href="https://github.com/AzkiVIP/PromptForge" target="_blank" rel="noopener" aria-label="GitHub repository">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+            <path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2.1c-3.2.7-3.88-1.36-3.88-1.36-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.48.1-3.08 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.5 3.17-1.18 3.17-1.18.63 1.6.23 2.78.11 3.07.75.82 1.2 1.85 1.2 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.8 1.1.8 2.22v3.29c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/>
+          </svg>
+          <span>GitHub</span>
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-logo-wrap" aria-hidden="true">
-        <img src="assets/images/logo-512.png" alt="" class="hero-logo" width="120" height="120" decoding="async" />
-      </div>
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Rule-based prompt engine · No AI APIs · 100% client-side
-      </div>
-      <h1 class="hero-title">Forge <span class="text-grad">professional prompts</span> for any visual project</h1>
-      <p class="hero-subtitle">
-        Poster, thumbnail, ad, cover, wallpaper, render — assemble detailed, production-ready
-        prompts with smart search, references, color palettes, moods, lighting, and platform presets.
-      </p>
-      <div class="hero-actions">
-        <a href="#generator" class="btn btn-primary btn-lg">Start generating</a>
-        <a href="#features" class="btn btn-ghost btn-lg">See features</a>
-      </div>
-    </div>
-  </section>
+  <!-- ===================== MAIN APP ===================== -->
+  <main class="app" id="generator" role="main">
 
-  <!-- ========== FEATURES STRIP ========== -->
-  <section id="features" class="features-strip">
-    <div class="container features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">🔍</div>
-        <h3>Smart Search</h3>
-        <p>Fuzzy, typo-tolerant filtering across every option list.</p>
+    <!-- ============== LEFT PANEL (40%) ============== -->
+    <section class="panel panel--left" aria-label="Generator controls">
+      <div class="panel__header">
+        <div>
+          <h2 class="panel__title">Generator</h2>
+          <p class="panel__subtitle">Configure your visual prompt</p>
+        </div>
+        <button class="btn btn--ghost btn--sm" id="resetAllBtn" type="button" title="Reset all fields">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+          Reset
+        </button>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎨</div>
-        <h3>Rule-Based Engine</h3>
-        <p>Composes cinematic atmosphere, detail layers, and mood automatically.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🖼️</div>
-        <h3>Reference Uploads</h3>
-        <p>Drag-and-drop multiple reference images with live preview.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💾</div>
-        <h3>History & Favorites</h3>
-        <p>Saved locally — never lose a great prompt again.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- ========== GENERATOR ========== -->
-  <main id="generator" class="generator">
-    <div class="container generator-grid">
+      <div class="panel__body" id="generatorPanel">
 
-      <!-- LEFT COLUMN: Controls -->
-      <section class="panel panel-controls" aria-label="Generator controls">
-
-        <!-- PROJECT TYPE -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">01</span>
-            <span class="section-title">Project Type</span>
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Project Type -->
+        <div class="accordion" data-section="projectType">
+          <button class="accordion__head" type="button" aria-expanded="true">
+            <span class="accordion__index">01</span>
+            <span class="accordion__label">Project Type</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="poster-types" data-target="posterType">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search project type (e.g. minecraft, thumbnail)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox" aria-label="Project type results"></div>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label" for="projectType-category">Category</label>
+              <div class="combobox" data-combobox="projectTypeCategory" data-mode="single"></div>
             </div>
-            <input type="text" id="customPosterType" class="text-input" placeholder="Or type a custom project type…" />
+            <div class="field">
+              <label class="field__label" for="projectType-preset">Preset</label>
+              <div class="combobox" data-combobox="projectTypePreset" data-mode="single"></div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="projectType-custom">Custom Project Type</label>
+              <input class="input" id="projectType-custom" type="text" placeholder="e.g. Festival Poster" />
+            </div>
           </div>
         </div>
 
-        <!-- SUBJECT -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">02</span>
-            <span class="section-title">Subject</span>
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Subject -->
+        <div class="accordion" data-section="subject">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">02</span>
+            <span class="accordion__label">Subject</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="section-body">
-            <input type="text" id="subjectText" class="text-input" placeholder="Describe the main subject (e.g. a knight holding a glowing sword)" />
-            <div class="dropzone" id="referenceDropzone" tabindex="0" role="button" aria-label="Upload reference images">
-              <input type="file" id="referenceInput" accept="image/png,image/jpeg,image/webp" multiple hidden />
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
-              </svg>
-              <p class="dropzone-text">Drag &amp; drop reference images here, or <span class="link">browse</span></p>
-              <p class="dropzone-hint">PNG · JPG · WEBP — references only</p>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label" for="subject-text">Subject Description</label>
+              <textarea class="textarea" id="subject-text" rows="2" placeholder="e.g. A lone warrior standing on a cliff"></textarea>
             </div>
-            <div class="image-preview-grid" id="referencePreview" aria-live="polite"></div>
-          </div>
-        </div>
-
-        <!-- ART STYLE -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">03</span>
-            <span class="section-title">Art Style</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="styles" data-target="artStyle">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search art style (e.g. cyberpunk, anime)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
-            </div>
-            <input type="text" id="customArtStyle" class="text-input" placeholder="Or type a custom art style…" />
-          </div>
-        </div>
-
-        <!-- CAMERA ANGLE -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">04</span>
-            <span class="section-title">Camera Angle</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="presets.cameraAngles" data-target="cameraAngle">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search camera angle (e.g. low angle, close up)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
-            </div>
-            <input type="text" id="customCameraAngle" class="text-input" placeholder="Or type a custom camera angle…" />
-          </div>
-        </div>
-
-        <!-- LIGHTING -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">05</span>
-            <span class="section-title">Lighting</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="presets.lighting" data-target="lighting">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search lighting (e.g. golden hour, neon)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
-            </div>
-            <input type="text" id="customLighting" class="text-input" placeholder="Or type a custom lighting…" />
-          </div>
-        </div>
-
-        <!-- COLOR PALETTE -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">06</span>
-            <span class="section-title">Color Palette</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="palette-grid" id="paletteGrid"></div>
-            <div class="color-advanced">
-              <h4 class="sub-label">Advanced picker</h4>
-              <div class="color-mode-toggle" role="tablist" aria-label="Color palette mode">
-                <button type="button" class="color-mode-btn active" data-mode="single" role="tab">Single Color</button>
-                <button type="button" class="color-mode-btn" data-mode="dual" role="tab">Dual Color</button>
-                <button type="button" class="color-mode-btn" data-mode="custom" role="tab">Custom Palette</button>
-              </div>
-              <div class="color-row mode-single" id="colorRow">
-                <div class="color-field" data-slot="primary">
-                  <label for="primaryColor">Primary</label>
-                  <div class="color-control">
-                    <input type="color" id="primaryColor" value="#3B82F6" />
-                    <input type="text" id="primaryHex" class="hex-input" value="#3B82F6" maxlength="7" />
-                  </div>
-                </div>
-                <div class="color-field" data-slot="secondary">
-                  <label for="secondaryColor">Secondary</label>
-                  <div class="color-control">
-                    <input type="color" id="secondaryColor" value="#1E40AF" />
-                    <input type="text" id="secondaryHex" class="hex-input" value="#1E40AF" maxlength="7" />
-                  </div>
-                </div>
-                <div class="color-field" data-slot="accent">
-                  <label for="accentColor">Accent</label>
-                  <div class="color-control">
-                    <input type="color" id="accentColor" value="#93C5FD" />
-                    <input type="text" id="accentHex" class="hex-input" value="#93C5FD" maxlength="7" />
-                  </div>
+            <div class="field">
+              <label class="field__label">Reference Image</label>
+              <div class="dropzone" id="subject-dropzone" tabindex="0">
+                <input class="dropzone__input" id="subject-file" type="file" accept="image/*" />
+                <div class="dropzone__prompt">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 21h14"/></svg>
+                  <span>Drag &amp; drop or <em>click to browse</em></span>
                 </div>
               </div>
-              <div class="palette-preview" id="palettePreview" aria-label="Live palette preview"></div>
+              <div class="previews" id="subject-previews" aria-live="polite"></div>
             </div>
           </div>
         </div>
 
-        <!-- BACKGROUND -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">07</span>
-            <span class="section-title">Background</span>
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Art Style -->
+        <div class="accordion" data-section="artStyle">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">03</span>
+            <span class="accordion__label">Art Style</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="presets.backgrounds" data-target="background">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search background (e.g. cyberpunk city, forest)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Art Style</label>
+              <div class="combobox" data-combobox="artStyle" data-mode="single"></div>
             </div>
-            <input type="text" id="customBackground" class="text-input" placeholder="Or describe a custom background…" />
-            <div class="dropzone dropzone-sm" id="bgDropzone" tabindex="0" role="button" aria-label="Upload background image">
-              <input type="file" id="bgInput" accept="image/png,image/jpeg,image/webp" hidden />
-              <p class="dropzone-text">Drag &amp; drop background image, or <span class="link">browse</span></p>
+            <div class="field">
+              <label class="field__label" for="artStyle-custom">Custom Style</label>
+              <input class="input" id="artStyle-custom" type="text" placeholder="e.g. Watercolor + Ink" />
             </div>
-            <div class="image-preview-grid" id="bgPreview" aria-live="polite"></div>
           </div>
         </div>
 
-        <!-- MOOD -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">08</span>
-            <span class="section-title">Mood</span>
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Camera Angle -->
+        <div class="accordion" data-section="cameraAngle">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">04</span>
+            <span class="accordion__label">Camera Angle</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="moods.moods" data-target="mood">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search mood (e.g. epic, mysterious)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Camera Angle</label>
+              <div class="combobox" data-combobox="cameraAngle" data-mode="single"></div>
             </div>
-            <input type="text" id="customMood" class="text-input" placeholder="Or type a custom mood…" />
-          </div>
-        </div>
-
-        <!-- TYPOGRAPHY -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">09</span>
-            <span class="section-title">Typography</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="searchable" data-searchable="moods.typography" data-target="typography">
-              <div class="search-input-wrap">
-                <svg class="search-icon" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-                  <path d="M11.74 10.34l3.92 3.93-1.42 1.42-3.92-3.93a6.5 6.5 0 1 1 1.42-1.42zM7 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Search typography (e.g. bold, esports)" autocomplete="off" />
-              </div>
-              <div class="search-results" role="listbox"></div>
+            <div class="field">
+              <label class="field__label" for="cameraAngle-custom">Custom Angle</label>
+              <input class="input" id="cameraAngle-custom" type="text" placeholder="e.g. 35° Dutch angle" />
             </div>
-            <input type="text" id="customTypography" class="text-input" placeholder="Or type a custom typography style…" />
           </div>
         </div>
 
-        <!-- EFFECTS -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">10</span>
-            <span class="section-title">Effects</span>
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Lighting -->
+        <div class="accordion" data-section="lighting">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">05</span>
+            <span class="accordion__label">Lighting</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="section-body">
-            <div class="chip-grid" id="effectsGrid" role="group" aria-label="Effects multi-select"></div>
-          </div>
-        </div>
-
-        <!-- NEGATIVE PROMPT -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">11</span>
-            <span class="section-title">Negative Prompt</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="chip-grid" id="negativeGrid" role="group" aria-label="Negative prompts"></div>
-            <input type="text" id="customNegative" class="text-input" placeholder="Add custom negative prompt terms…" />
-          </div>
-        </div>
-
-        <!-- ASPECT RATIO -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">12</span>
-            <span class="section-title">Aspect Ratio</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="ratio-grid" id="ratioGrid" role="group" aria-label="Aspect ratios"></div>
-          </div>
-        </div>
-
-        <!-- PROMPT STRENGTH -->
-        <div class="field-block" data-section>
-          <button class="section-header" type="button" aria-expanded="true">
-            <span class="section-index">13</span>
-            <span class="section-title">Prompt Strength</span>
-            <span class="chevron" aria-hidden="true"></span>
-          </button>
-          <div class="section-body">
-            <div class="slider-row">
-              <input type="range" id="strengthSlider" min="0" max="100" value="60" class="slider" />
-              <output for="strengthSlider" id="strengthValue" class="slider-value">60</output>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Lighting</label>
+              <div class="combobox" data-combobox="lighting" data-mode="single"></div>
             </div>
-            <div class="slider-marks">
-              <span>Simple</span>
-              <span>Balanced</span>
-              <span>Detailed</span>
+            <div class="field">
+              <label class="field__label" for="lighting-custom">Custom Lighting</label>
+              <input class="input" id="lighting-custom" type="text" placeholder="e.g. Soft window light" />
             </div>
-            <p class="hint" id="strengthHint">Balanced prompts — recommended for most use cases.</p>
           </div>
         </div>
 
-        <!-- ADVANCED OPTIONS -->
-        <div class="field-block">
-          <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false" aria-controls="advancedPanel">
-            <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor" aria-hidden="true">
-              <path d="M8 1l2 5h5l-4 3 1.5 5L8 11l-4.5 3L5 9 1 6h5z"/>
-            </svg>
-            Advanced Options
-            <span class="chevron" aria-hidden="true"></span>
+        <!-- Color Palette -->
+        <div class="accordion" data-section="colorPalette">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">06</span>
+            <span class="accordion__label">Color Palette</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
           </button>
-          <div class="advanced-panel" id="advancedPanel" hidden>
-            <div class="advanced-grid">
-              <div class="adv-field">
-                <label for="composition">Composition</label>
-                <select id="composition" class="select-input">
-                  <option value="">— None —</option>
-                </select>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Palette Mode</label>
+              <div class="seg" id="colorMode" role="tablist" aria-label="Color palette mode">
+                <button class="seg__btn is-active" type="button" data-mode="single">Single</button>
+                <button class="seg__btn" type="button" data-mode="dual">Dual</button>
+                <button class="seg__btn" type="button" data-mode="multi">Multi</button>
               </div>
-              <div class="adv-field">
-                <label for="renderingQuality">Rendering Quality</label>
-                <select id="renderingQuality" class="select-input">
-                  <option value="">— None —</option>
-                </select>
-              </div>
-              <div class="adv-field">
-                <label for="aiPreset">AI Platform Preset</label>
-                <select id="aiPreset" class="select-input">
-                  <option value="">— None —</option>
-                </select>
-              </div>
-              <div class="adv-field">
-                <label for="promptExpansion">Prompt Expansion</label>
-                <select id="promptExpansion" class="select-input">
-                  <option value="">— None —</option>
-                </select>
-              </div>
-              <div class="adv-field">
-                <label for="subjectWeight">Subject Weight</label>
-                <div class="slider-row">
-                  <input type="range" id="subjectWeight" min="0" max="100" value="80" class="slider slider-sm" />
-                  <output for="subjectWeight" id="subjectWeightValue" class="slider-value">80</output>
+            </div>
+            <div class="field">
+              <label class="field__label">Colors</label>
+              <div class="color-row" id="colorRow">
+                <div class="color-slot" data-slot="0">
+                  <input type="color" class="color-slot__picker" value="#3B82F6" />
+                  <input type="text" class="color-slot__hex" value="#3B82F6" maxlength="7" />
                 </div>
               </div>
-              <div class="adv-field">
-                <label for="environmentWeight">Environment Weight</label>
-                <div class="slider-row">
-                  <input type="range" id="environmentWeight" min="0" max="100" value="60" class="slider slider-sm" />
-                  <output for="environmentWeight" id="environmentWeightValue" class="slider-value">60</output>
-                </div>
-              </div>
-              <div class="adv-field">
-                <label for="styleWeight">Style Weight</label>
-                <div class="slider-row">
-                  <input type="range" id="styleWeight" min="0" max="100" value="70" class="slider slider-sm" />
-                  <output for="styleWeight" id="styleWeightValue" class="slider-value">70</output>
-                </div>
-              </div>
-              <div class="adv-field">
-                <label for="colorWeight">Color Weight</label>
-                <div class="slider-row">
-                  <input type="range" id="colorWeight" min="0" max="100" value="50" class="slider slider-sm" />
-                  <output for="colorWeight" id="colorWeightValue" class="slider-value">50</output>
-                </div>
-              </div>
+              <button class="btn btn--ghost btn--sm color-row__add" id="colorAddBtn" type="button" hidden>+ Add color</button>
+            </div>
+            <div class="field">
+              <label class="field__label">Live Preview</label>
+              <div class="palette-preview" id="palettePreview"></div>
             </div>
           </div>
         </div>
 
-      </section>
+        <!-- Background -->
+        <div class="accordion" data-section="background">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">07</span>
+            <span class="accordion__label">Background</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Background Scene</label>
+              <div class="combobox" data-combobox="background" data-mode="single"></div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="background-custom">Custom Background</label>
+              <input class="input" id="background-custom" type="text" placeholder="e.g. Floating islands at dawn" />
+            </div>
+            <div class="field">
+              <label class="field__label">Background Reference</label>
+              <div class="dropzone" id="background-dropzone" tabindex="0">
+                <input class="dropzone__input" id="background-file" type="file" accept="image/*" />
+                <div class="dropzone__prompt">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 8 5-5 5 5"/><path d="M5 21h14"/></svg>
+                  <span>Drag &amp; drop or <em>click to browse</em></span>
+                </div>
+              </div>
+              <div class="previews" id="background-previews" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
 
-      <!-- RIGHT COLUMN: Output -->
-      <aside class="panel panel-output" aria-label="Generated prompt preview">
-        <div class="output-header">
+        <!-- Mood -->
+        <div class="accordion" data-section="mood">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">08</span>
+            <span class="accordion__label">Mood</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Mood</label>
+              <div class="combobox" data-combobox="mood" data-mode="single"></div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="mood-custom">Custom Mood</label>
+              <input class="input" id="mood-custom" type="text" placeholder="e.g. Nostalgic serenity" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography -->
+        <div class="accordion" data-section="typography">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">09</span>
+            <span class="accordion__label">Typography Style</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Typography</label>
+              <div class="combobox" data-combobox="typography" data-mode="single"></div>
+            </div>
+            <div class="field">
+              <label class="field__label" for="typography-custom">Custom Typography</label>
+              <input class="input" id="typography-custom" type="text" placeholder="e.g. Serif headline, sans body" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Effects -->
+        <div class="accordion" data-section="effects">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">10</span>
+            <span class="accordion__label">Effects</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Effects (multi-select)</label>
+              <div class="chip-grid" id="effectsGrid" role="group" aria-label="Effects"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Aspect Ratio -->
+        <div class="accordion" data-section="aspectRatio">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">11</span>
+            <span class="accordion__label">Aspect Ratio</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Aspect Ratio</label>
+              <div class="ratio-grid" id="ratioGrid" role="group" aria-label="Aspect ratio"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Advanced -->
+        <div class="accordion" data-section="advanced">
+          <button class="accordion__head" type="button" aria-expanded="false">
+            <span class="accordion__index">12</span>
+            <span class="accordion__label">Advanced</span>
+            <span class="accordion__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+            </span>
+          </button>
+          <div class="accordion__body">
+            <div class="field">
+              <label class="field__label">Composition</label>
+              <div class="chip-grid" id="compositionGrid" role="group" aria-label="Composition" data-single="1"></div>
+            </div>
+            <div class="field">
+              <label class="field__label">Rendering Quality</label>
+              <div class="chip-grid" id="renderingGrid" role="group" aria-label="Rendering quality" data-single="1"></div>
+            </div>
+            <div class="field">
+              <label class="field__label">Prompt Expansion</label>
+              <div class="chip-grid" id="expansionGrid" role="group" aria-label="Prompt expansion" data-single="1"></div>
+            </div>
+            <div class="field">
+              <label class="field__label">AI Preset</label>
+              <div class="chip-grid" id="aiPresetGrid" role="group" aria-label="AI preset" data-single="1"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============== RIGHT PANEL (60%) ============== -->
+    <section class="panel panel--right" aria-label="Output and history">
+
+      <!-- Output block -->
+      <div class="output" id="output">
+        <div class="output__header">
           <div>
-            <h2 class="output-title">Generated Prompt</h2>
-            <p class="output-subtitle">Live preview — updates as you tune controls.</p>
+            <h2 class="panel__title">Output</h2>
+            <p class="panel__subtitle">Generated prompt &amp; negative prompt</p>
           </div>
-          <span class="live-indicator" aria-hidden="true">
-            <span class="live-dot"></span> Live
-          </span>
-        </div>
-
-        <div class="output-section">
-          <div class="output-label">
-            <span>Prompt</span>
-            <button class="btn btn-ghost btn-sm" data-copy="prompt" type="button">Copy</button>
+          <div class="output__actions">
+            <button class="btn btn--primary btn--sm" id="generateBtn" type="button">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/><path d="m12 3 9 9-9 9-9-9 9-9Z"/></svg>
+              Generate
+            </button>
+            <button class="btn btn--ghost btn--sm" id="clearBtn" type="button">Clear</button>
           </div>
-          <div class="output-box" id="promptOutput" aria-live="polite"></div>
         </div>
 
-        <div class="output-section">
-          <div class="output-label">
-            <span>Negative Prompt</span>
-            <button class="btn btn-ghost btn-sm" data-copy="negative" type="button">Copy</button>
+        <div class="output__body">
+          <div class="output__block">
+            <div class="output__block-head">
+              <span class="output__label">Prompt</span>
+              <button class="btn btn--ghost btn--xs" id="copyPromptBtn" type="button" data-copy="prompt">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="output__text" id="promptOutput" aria-live="polite">
+              <span class="output__placeholder">Configure options on the left, then press <strong>Generate</strong>.</span>
+            </div>
           </div>
-          <div class="output-box output-box-muted" id="negativeOutput" aria-live="polite"></div>
-        </div>
 
-        <div class="output-actions">
-          <button class="btn btn-primary" id="generateBtn" type="button">Generate New</button>
-          <button class="btn btn-secondary" id="saveFavoriteBtn" type="button">Save as Favorite</button>
-          <button class="btn btn-ghost" id="clearBtn" type="button">Clear All</button>
-        </div>
+          <div class="output__block">
+            <div class="output__block-head">
+              <span class="output__label">Negative Prompt</span>
+              <button class="btn btn--ghost btn--xs" id="copyNegativeBtn" type="button" data-copy="negative">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+                Copy
+              </button>
+            </div>
+            <div class="output__text output__text--muted" id="negativeOutput" aria-live="polite">
+              <span class="output__placeholder">Negative prompt will appear here.</span>
+            </div>
+          </div>
 
-        <!-- History & Favorites -->
-        <div class="history-tabs" id="history">
-          <button class="tab-btn tab-active" data-tab="recent" type="button">Recent</button>
-          <button class="tab-btn" data-tab="favorites" id="favorites" type="button">Favorites</button>
-          <button class="tab-btn" data-tab="history" type="button">History</button>
-        </div>
-        <div class="history-list" id="historyList" aria-live="polite"></div>
-      </aside>
+          <div class="output__meta" id="outputMeta"></div>
 
-    </div>
+          <div class="output__save">
+            <button class="btn btn--ghost btn--sm" id="saveFavoriteBtn" type="button" disabled>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.27 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2Z"/></svg>
+              Save to Favorites
+            </button>
+            <button class="btn btn--ghost btn--sm" id="saveHistoryBtn" type="button" disabled>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+              Save to History
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- History block -->
+      <div class="history" id="history">
+        <div class="history__head">
+          <div>
+            <h3 class="panel__title panel__title--sm">History</h3>
+            <p class="panel__subtitle">Recent prompts (stored locally)</p>
+          </div>
+          <button class="btn btn--ghost btn--xs" id="clearHistoryBtn" type="button">Clear all</button>
+        </div>
+        <div class="history__body" id="historyList" aria-live="polite"></div>
+      </div>
+
+      <!-- Favorites block -->
+      <div class="history" id="favorites">
+        <div class="history__head">
+          <div>
+            <h3 class="panel__title panel__title--sm">Favorites</h3>
+            <p class="panel__subtitle">Starred prompts (stored locally)</p>
+          </div>
+          <button class="btn btn--ghost btn--xs" id="clearFavoritesBtn" type="button">Clear all</button>
+        </div>
+        <div class="history__body" id="favoritesList" aria-live="polite"></div>
+      </div>
+
+    </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <a href="#" class="brand brand-footer" aria-label="PromptForge Home">
-          <img src="assets/images/logo.png" alt="PromptForge logo" class="brand-logo" width="32" height="32" decoding="async" />
-          <span class="brand-name">Prompt<span class="accent">Forge</span></span>
-        </a>
-        <p>Open-source visual prompt generator. Built with vanilla HTML, CSS, and JavaScript.</p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Project</h4>
-          <a href="#generator">Generator</a>
-          <a href="#features">Features</a>
-          <a href="#history">History</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="README.md">README</a>
-          <a href="manifest.json">Manifest</a>
-          <a href="sitemap.xml">Sitemap</a>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <a href="https://github.com/AzkiVIP/PromptForge" target="_blank" rel="noopener">GitHub</a>
-          <a href="LICENSE">License</a>
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <span class="brand__mark brand__mark--sm" aria-hidden="true">
+          <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="26" height="26" rx="6" fill="#3B82F6"/>
+            <path d="M11 22V10h5.2c2.9 0 4.8 1.6 4.8 4.2 0 2.6-1.9 4.3-4.8 4.3H14V22h-3Zm3-6.3h2c1.3 0 2.1-.7 2.1-1.5 0-.9-.8-1.5-2.1-1.5h-2v3Z" fill="#0F172A"/>
+          </svg>
+        </span>
+        <div>
+          <div class="footer__title">PromptForge</div>
+          <div class="footer__sub">Premium visual prompt generator · Open source</div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <span>© <span id="year">2026</span> PromptForge · MIT License</span>
-        <span class="footer-meta">v1.0.0 · No tracking · No cookies</span>
+
+      <div class="footer__links">
+        <a href="https://github.com/AzkiVIP/PromptForge" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/AzkiVIP/PromptForge/issues" target="_blank" rel="noopener">Issues</a>
+        <a href="https://github.com/AzkiVIP/PromptForge#license" target="_blank" rel="noopener">License</a>
       </div>
+
+      <div class="footer__copy">© <span id="year"></span> PromptForge · MIT License · Built with HTML, CSS &amp; Vanilla JS</div>
     </div>
   </footer>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
-
-  <!-- Scripts (deferred, modular) -->
-  <script src="assets/js/storage.js" defer></script>
-  <script src="assets/js/presets.js" defer></script>
-  <script src="assets/js/search.js" defer></script>
-  <script src="assets/js/generator.js" defer></script>
-  <script src="assets/js/ui.js" defer></script>
-  <script src="assets/js/app.js" defer></script>
+  <!-- Scripts (defer not strictly needed; loaded in order at end of body) -->
+  <script src="js/data.js"></script>
+  <script src="js/combobox.js"></script>
+  <script src="js/accordion.js"></script>
+  <script src="js/generator.js"></script>
+  <script src="js/history.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,89 +1,38 @@
 {
-  "name": "PromptForge - Professional Visual Prompt Generator",
+  "name": "PromptForge — Premium Visual Prompt Generator",
   "short_name": "PromptForge",
-  "description": "Generate professional prompts for posters, thumbnails, advertisements, covers, artworks, wallpapers, and visual design projects.",
-  "start_url": "./",
+  "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#0F172A",
   "theme_color": "#0F172A",
   "lang": "en",
-  "categories": ["design", "productivity", "utilities"],
+  "categories": ["productivity", "design", "utilities"],
   "icons": [
     {
-      "src": "assets/icons/icon-16.png",
-      "sizes": "16x16",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-32.png",
-      "sizes": "32x32",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-48.png",
-      "sizes": "48x48",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-64.png",
-      "sizes": "64x64",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-128.png",
-      "sizes": "128x128",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "assets/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "assets/icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "assets/images/logo-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
     {
-      "name": "Open Generator",
-      "short_name": "Generator",
-      "url": "./#generator",
-      "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
+      "name": "Generator",
+      "url": "./index.html#generator",
+      "description": "Open the prompt generator"
     },
     {
-      "name": "View History",
-      "short_name": "History",
-      "url": "./#history",
-      "icons": [{ "src": "assets/icons/icon-96.png", "sizes": "96x96" }]
+      "name": "History",
+      "url": "./index.html#history",
+      "description": "View prompt history"
+    },
+    {
+      "name": "Favorites",
+      "url": "./index.html#favorites",
+      "description": "View saved favorites"
     }
   ]
 }

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F172A"/>
+      <stop offset="0.6" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#3B82F6"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.1" r="0.7">
+      <stop offset="0" stop-color="#3B82F6" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Logo -->
+  <g transform="translate(80, 80)">
+    <rect x="0" y="0" width="92" height="92" rx="22" fill="url(#acc)"/>
+    <path d="M30 72V28h18c10 0 16 5 16 14 0 9-6 15-16 15h-9v15h-9Zm9-21h7c4 0 7-2 7-6 0-3-3-5-7-5h-7v11Z" fill="#0F172A"/>
+    <circle cx="78" cy="32" r="6" fill="#F8FAFC"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="200" y="142" font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="44" font-weight="700" fill="#F8FAFC">Prompt<tspan fill="#3B82F6">Forge</tspan></text>
+  <text x="200" y="180" font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="20" fill="#94A3B8">Premium Visual Prompt Generator</text>
+
+  <!-- Headline -->
+  <text x="80" y="320" font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="76" font-weight="800" fill="#F8FAFC" letter-spacing="-2">Craft cinematic</text>
+  <text x="80" y="410" font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="76" font-weight="800" fill="#F8FAFC" letter-spacing="-2">prompts in seconds.</text>
+
+  <!-- Subline -->
+  <text x="80" y="475" font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="24" fill="#94A3B8">Posters · Thumbnails · Ads · Covers · Concept Art · AI image generation</text>
+
+  <!-- Feature pills -->
+  <g font-family="Inter, Segoe UI, system-ui, -apple-system, Helvetica, Arial, sans-serif" font-size="18" font-weight="600">
+    <g transform="translate(80, 520)">
+      <rect x="0" y="0" width="170" height="42" rx="10" fill="#1E293B" stroke="#2B3A55"/>
+      <text x="85" y="27" text-anchor="middle" fill="#F8FAFC">Rule-based engine</text>
+    </g>
+    <g transform="translate(266, 520)">
+      <rect x="0" y="0" width="170" height="42" rx="10" fill="#1E293B" stroke="#2B3A55"/>
+      <text x="85" y="27" text-anchor="middle" fill="#F8FAFC">No AI APIs</text>
+    </g>
+    <g transform="translate(452, 520)">
+      <rect x="0" y="0" width="220" height="42" rx="10" fill="#1E293B" stroke="#2B3A55"/>
+      <text x="110" y="27" text-anchor="middle" fill="#F8FAFC">Open source · MIT License</text>
+    </g>
+  </g>
+
+  <!-- Decorative right side: prompt preview card -->
+  <g transform="translate(770, 240)">
+    <rect x="0" y="0" width="350" height="280" rx="14" fill="#1E293B" stroke="#2B3A55"/>
+    <rect x="0" y="0" width="350" height="42" rx="14" fill="#233049"/>
+    <rect x="0" y="28" width="350" height="14" fill="#233049"/>
+    <circle cx="20" cy="21" r="5" fill="#EF4444"/>
+    <circle cx="36" cy="21" r="5" fill="#F59E0B"/>
+    <circle cx="52" cy="21" r="5" fill="#10B981"/>
+    <text x="80" y="27" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#94A3B8">promptforge — output</text>
+
+    <text x="20" y="78" font-family="JetBrains Mono, Fira Code, monospace" font-size="14" fill="#F8FAFC" font-weight="600">Minecraft-style game key</text>
+    <text x="20" y="98" font-family="JetBrains Mono, Fira Code, monospace" font-size="14" fill="#F8FAFC" font-weight="600">art, rendered in dark</text>
+    <text x="20" y="118" font-family="JetBrains Mono, Fira Code, monospace" font-size="14" fill="#F8FAFC" font-weight="600">fantasy art style, lit by</text>
+    <text x="20" y="138" font-family="JetBrains Mono, Fira Code, monospace" font-size="14" fill="#F8FAFC" font-weight="600">volumetric god-ray</text>
+    <text x="20" y="158" font-family="JetBrains Mono, Fira Code, monospace" font-size="14" fill="#F8FAFC" font-weight="600">lighting, epic mood…</text>
+
+    <rect x="20" y="190" width="310" height="32" rx="8" fill="#3B82F6"/>
+    <text x="175" y="211" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">Generate</text>
+  </g>
+</svg>

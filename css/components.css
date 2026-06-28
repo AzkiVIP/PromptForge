@@ -499,7 +499,7 @@
   color: var(--text-muted);
 }
 .output__text {
-  padding: 14px 10px;
+  padding: 14px 16px;
   font-size: 13.5px;
   line-height: 1.65;
   color: var(--text);

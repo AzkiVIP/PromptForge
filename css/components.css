@@ -10,9 +10,17 @@
   border-radius: var(--r-lg);
   background: var(--surface);
   margin-bottom: var(--sp-3);
-  overflow: hidden;            /* clip rounded corners only — accordion__body handles its own clipping */
+  /* Issue #3: visible by default so that fixed-position combobox panels
+     are never clipped. The .accordion__body itself carries overflow:hidden
+     when collapsed, which gives the rounded-corner clipping we want. */
+  overflow: visible;
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
+/* When collapsed, switch the container to overflow:hidden so the rounded
+   corners clip the body cleanly during the collapse animation. */
+.accordion:not(.is-open) { overflow: hidden; }
+/* Issue #1: last accordion in a panel must NOT reserve margin space below it. */
+.accordion:last-child { margin-bottom: 0; }
 .accordion.is-open {
   border-color: var(--border);
   box-shadow: var(--shadow-sm);
@@ -49,13 +57,18 @@
 }
 .accordion.is-open .accordion__chevron { transform: rotate(180deg); color: var(--accent); }
 
-/* Accordion body — collapses to ZERO height with proper overflow:hidden.
+/* Accordion body — collapses to EXACTLY zero height with overflow:hidden.
+   No padding, no margin, no reserved space when collapsed.
    When open, switches to overflow:visible AFTER the expand animation
    finishes (via .is-settled class added by JS) so that combobox dropdowns
-   inside can extend beyond the accordion's bottom edge. */
+   inside can extend beyond the accordion's bottom edge.
+   Issue #1: padding is applied to the inner wrapper (.accordion__body > *),
+   NEVER to .accordion__body itself, so the collapsed body has true 0 height. */
 .accordion__body {
   max-height: 0;
   height: 0;
+  padding: 0;
+  margin: 0;
   overflow: hidden;
   transition: max-height 280ms var(--ease);
 }
@@ -77,9 +90,15 @@
 .accordion__body > .previews,
 .accordion__body > .subjects { padding: 0 16px; }
 .accordion__body .field:first-child { padding-top: 4px; }
-.accordion.is-open .accordion__body { padding-bottom: 16px; }
+/* Issue #1: bottom padding lives on the LAST child of the body, not on the body
+   itself. This guarantees the collapsed body has zero height. */
+.accordion.is-open .accordion__body > .field:last-child,
+.accordion.is-open .accordion__body > .subjects:last-child,
+.accordion.is-open .accordion__body > .previews:last-child,
+.accordion.is-open .accordion__body > .dropzone:last-child { padding-bottom: 16px; }
 .accordion__body > .field:last-child { margin-bottom: 0; }
 .accordion__body .previews { padding-top: 8px; padding-bottom: 0; }
+.accordion__body .subjects:last-child { margin-bottom: 0; }
 
 /* ---------- Combobox ---------- */
 .combobox { position: relative; width: 100%; }
@@ -537,7 +556,9 @@
   display: flex;
   flex-direction: column;
   gap: var(--sp-3);
-  max-height: 480px;
+  /* Issue #2: adaptive max-height. Caps each list so all three right-panel
+     blocks (output + history + favorites) fit a typical viewport. */
+  max-height: 40vh;
   overflow-y: auto;
 }
 .history__empty {

@@ -6,7 +6,7 @@
 /* Large desktop — give panels a touch more breathing room */
 @media (min-width: 1440px) {
   :root { --maxw: 1760px; }
-  .panel__body { padding: var(--sp-5) var(--sp-6) var(--sp-8); }
+  .panel__body { padding: var(--sp-5) var(--sp-6) var(--sp-6); }
   .output, .history { padding: var(--sp-6) var(--sp-8); }
 }
 
@@ -18,19 +18,25 @@
   .ratio-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Tablet portrait — stack panels but keep independent scroll */
+/* Tablet portrait — stack panels; left panel no longer sticky, page scrolls */
 @media (max-width: 980px) {
   .app {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(0, 1fr) auto;
+    /* Issue #2: no row min-height — let content drive height. */
   }
   .panel--left {
     border-right: none;
     border-bottom: 1px solid var(--border-soft);
+    /* Issue #2: disable sticky + fixed height; let panel size to content. */
+    position: static;
+    height: auto;
+    overflow: visible;
   }
   .panel--right { display: flex; flex-direction: column; }
+  /* Issue #2: panel__body no longer needs to scroll on tablet; page scrolls. */
   .panel__body {
-    max-height: 70vh;
+    overflow: visible;
+    max-height: none;
   }
   .navbar__inner { padding: 0 var(--sp-4); gap: var(--sp-4); }
   .nav { gap: 0; }
@@ -52,7 +58,7 @@
   .nav__link { padding: 6px 8px; font-size: 12px; }
 
   .panel__header { padding: var(--sp-4); }
-  .panel__body { padding: var(--sp-3); max-height: none; }
+  .panel__body { padding: var(--sp-3); }
   .output, .history { padding: var(--sp-4); }
   .output__header { flex-wrap: wrap; }
   .output__actions { width: 100%; }
@@ -98,5 +104,6 @@
 @media print {
   .navbar, .footer, .output__actions, .entry__actions, .toast { display: none !important; }
   .app { display: block; }
+  .panel--left { position: static; height: auto; overflow: visible; }
   body { background: #fff; color: #000; }
 }

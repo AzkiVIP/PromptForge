@@ -3,33 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="theme-color" content="#0F172A" />
 
   <!-- Primary Meta -->
-  <title>PromptForge — Premium Visual Prompt Generator</title>
-  <meta name="description" content="PromptForge is a premium, open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation." />
-  <meta name="keywords" content="prompt generator, AI prompt, image prompt, midjourney prompt, sdxl prompt, flux prompt, poster prompt, thumbnail prompt, concept art prompt" />
-  <meta name="author" content="PromptForge" />
+  <title>PromptForge — Premium Visual Prompt Generator for AI Image Creation</title>
+  <meta name="description" content="PromptForge is a premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation. Rule-based engine. Supports ChatGPT Images, Flux, SDXL, Midjourney, and Gemini." />
+  <meta name="keywords" content="prompt generator, AI prompt generator, image prompt, midjourney prompt generator, sdxl prompt, flux prompt, ChatGPT image prompt, poster prompt, thumbnail prompt, concept art prompt, character art prompt, product render prompt, marketing asset prompt, open source prompt generator, vanilla javascript prompt generator" />
+  <meta name="author" content="PromptForge — AzkiVIP" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="rating" content="general" />
+  <meta name="distribution" content="global" />
   <link rel="canonical" href="https://azkivip.github.io/PromptForge/" />
+
+  <!-- Sitemap discovery -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
+  <link rel="alternate" type="application/xml" title="Sitemap" href="sitemap.xml" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PromptForge" />
   <meta property="og:title" content="PromptForge — Premium Visual Prompt Generator" />
-  <meta property="og:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation. Rule-based engine. No AI APIs." />
+  <meta property="og:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation. Rule-based engine. Supports ChatGPT Images, Flux, SDXL, Midjourney, and Gemini. No AI APIs." />
   <meta property="og:url" content="https://azkivip.github.io/PromptForge/" />
   <meta property="og:image" content="https://azkivip.github.io/PromptForge/assets/og-image.png" />
-  <meta property="og:site_name" content="PromptForge" />
+  <meta property="og:image:secure_url" content="https://azkivip.github.io/PromptForge/assets/og-image.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="96" />
+  <meta property="og:image:height" content="96" />
+  <meta property="og:image:alt" content="PromptForge logo — premium visual prompt generator" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="id_ID" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="PromptForge — Premium Visual Prompt Generator" />
-  <meta name="twitter:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation." />
-  <meta name="twitter:image" content="https://azkivip.github.io/PromptForge/assets/og-image.png" />
+  <meta name="twitter:site" content="@AzkiVIP" />
   <meta name="twitter:creator" content="@AzkiVIP" />
+  <meta name="twitter:title" content="PromptForge — Premium Visual Prompt Generator" />
+  <meta name="twitter:description" content="Craft cinematic, professional prompts for posters, thumbnails, ads, concept art, and AI image generation. Rule-based engine. No AI APIs." />
+  <meta name="twitter:image" content="https://azkivip.github.io/PromptForge/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="PromptForge logo — premium visual prompt generator" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="mask-icon" href="assets/favicon.png" color="#3B82F6" />
   <link rel="manifest" href="manifest.json" />
 
   <!-- Styles -->
@@ -37,25 +58,96 @@
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD: WebSite schema (helps Google's Knowledge Graph) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "PromptForge",
+    "alternateName": "PromptForge Visual Prompt Generator",
+    "url": "https://azkivip.github.io/PromptForge/",
+    "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.",
+    "inLanguage": ["en", "id"],
+    "image": "https://azkivip.github.io/PromptForge/assets/og-image.png",
+    "isAccessibleForFree": true,
+    "applicationCategory": "DesignApplication",
+    "author": {
+      "@type": "Person",
+      "name": "AzkiVIP",
+      "url": "https://github.com/AzkiVIP"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "PromptForge",
+      "url": "https://azkivip.github.io/PromptForge/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://azkivip.github.io/PromptForge/assets/logo.png",
+        "width": 96,
+        "height": 96
+      }
+    },
+    "potentialAction": {
+      "@type": "UseAction",
+      "target": "https://azkivip.github.io/PromptForge/#generator",
+      "name": "Use the prompt generator"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD: SoftwareApplication schema (richer app metadata) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "PromptForge",
     "applicationCategory": "DesignApplication",
-    "operatingSystem": "Any",
-    "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.",
+    "applicationSubCategory": "AI Prompt Generator",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires a modern web browser with JavaScript enabled.",
+    "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation. Rule-based engine with no AI APIs.",
     "url": "https://azkivip.github.io/PromptForge/",
+    "downloadUrl": "https://github.com/AzkiVIP/PromptForge/releases",
+    "installUrl": "https://azkivip.github.io/PromptForge/",
+    "screenshot": "https://azkivip.github.io/PromptForge/assets/og-image.png",
+    "featureList": [
+      "Rule-based prompt generation engine",
+      "Smart searchable comboboxes with fuzzy match",
+      "Multiple AI presets (ChatGPT Images, Flux, SDXL, Midjourney, Gemini)",
+      "Multiple subjects with importance ranking",
+      "Watermark, custom effects, and custom resolution support",
+      "Auto-translation to Indonesian",
+      "LocalStorage history and favorites",
+      "No frameworks, no build step, no dependencies"
+    ],
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
+    "license": "https://github.com/AzkiVIP/PromptForge/blob/main/LICENSE",
     "author": {
+      "@type": "Person",
+      "name": "AzkiVIP",
+      "url": "https://github.com/AzkiVIP"
+    },
+    "publisher": {
       "@type": "Organization",
       "name": "PromptForge",
-      "url": "https://github.com/AzkiVIP/PromptForge"
+      "url": "https://azkivip.github.io/PromptForge/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://azkivip.github.io/PromptForge/assets/logo.png",
+        "width": 96,
+        "height": 96
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "ratingCount": "1",
+      "bestRating": "5",
+      "worstRating": "1"
     }
   }
   </script>

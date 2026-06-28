@@ -188,13 +188,15 @@ a { color: inherit; text-decoration: none; }
 .btn--danger:hover { background: rgba(239, 68, 68, 0.18); }
 
 /* ---------- App layout ---------- */
+/* Issue #2: no fixed min-height — panels size to content, with independent
+   scroll on the left panel. The grid's align-items:stretch keeps both
+   columns equal height naturally. */
 .app {
   display: grid;
   grid-template-columns: 40% 60%;
   gap: 0;
   max-width: var(--maxw);
   margin: 0 auto;
-  min-height: calc(100vh - var(--navbar-h) - 96px);
   border-left: 1px solid var(--border-soft);
   border-right: 1px solid var(--border-soft);
 }
@@ -209,11 +211,18 @@ a { color: inherit; text-decoration: none; }
 .panel--left {
   border-right: 1px solid var(--border-soft);
   background: linear-gradient(180deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.4));
+  /* Issue #2: left panel scrolls independently — height = viewport minus navbar.
+     No min-height, no fixed max-height. Sticky header stays at top. */
+  height: calc(100vh - var(--navbar-h));
+  position: sticky;
+  top: var(--navbar-h);
+  overflow: hidden;
 }
 .panel--right {
   background: var(--bg);
-  display: grid;
-  grid-template-rows: auto auto auto;
+  display: flex;
+  flex-direction: column;
+  /* Issue #2: right panel grows to content; no fixed height. */
 }
 
 .panel__header {
@@ -223,12 +232,11 @@ a { color: inherit; text-decoration: none; }
   gap: var(--sp-4);
   padding: var(--sp-5) var(--sp-6);
   border-bottom: 1px solid var(--border-soft);
-  position: sticky;
-  top: 0;
   background: rgba(15, 23, 42, 0.92);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  z-index: 5;
+  /* Issue #2: not sticky here — the parent .panel--left is sticky. */
+  flex-shrink: 0;
 }
 .panel__title {
   margin: 0;
@@ -244,12 +252,14 @@ a { color: inherit; text-decoration: none; }
 }
 
 .panel__body {
+  /* Issue #2: panel__body inherits its height from .panel--left (which is
+     height: calc(100vh - navbar)). flex:1 + min-height:0 lets it shrink and
+     scroll independently. No max-height needed. */
   overflow-y: auto;
   overflow-x: hidden;
-  padding: var(--sp-4) var(--sp-5) var(--sp-8);
+  padding: var(--sp-4) var(--sp-5) var(--sp-5);
   flex: 1;
   min-height: 0;
-  max-height: calc(100vh - var(--navbar-h) - 100px);
 }
 
 /* ---------- Footer ---------- */

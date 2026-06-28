@@ -1,15 +1,19 @@
 {
   "name": "PromptForge — Premium Visual Prompt Generator",
   "short_name": "PromptForge",
-  "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.",
-  "start_url": "./index.html",
+  "description": "Premium open-source visual prompt generator for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation. Rule-based engine. Supports ChatGPT Images, Flux, SDXL, Midjourney, and Gemini.",
+  "start_url": "./index.html?utm_source=pwa",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "orientation": "any",
   "background_color": "#0F172A",
   "theme_color": "#0F172A",
   "lang": "en",
-  "categories": ["productivity", "design", "utilities"],
+  "dir": "ltr",
+  "categories": ["productivity", "design", "utilities", "developer"],
+  "id": "/PromptForge/",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/logo.png",
@@ -27,18 +31,24 @@
   "shortcuts": [
     {
       "name": "Generator",
-      "url": "./index.html#generator",
-      "description": "Open the prompt generator"
+      "short_name": "Generator",
+      "description": "Open the prompt generator",
+      "url": "./index.html#generator?utm_source=pwa_shortcut",
+      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
     },
     {
       "name": "History",
-      "url": "./index.html#history",
-      "description": "View prompt history"
+      "short_name": "History",
+      "description": "View prompt history",
+      "url": "./index.html#history?utm_source=pwa_shortcut",
+      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
     },
     {
       "name": "Favorites",
-      "url": "./index.html#favorites",
-      "description": "View saved favorites"
+      "short_name": "Favorites",
+      "description": "View saved favorites",
+      "url": "./index.html#favorites?utm_source=pwa_shortcut",
+      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
     }
   ]
 }

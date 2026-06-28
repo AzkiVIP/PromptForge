@@ -18,7 +18,7 @@
   .ratio-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
-/* Tablet portrait — stack panels; left panel no longer sticky, page scrolls */
+/* Tablet portrait & smaller — switch to hamburger menu, stack panels */
 @media (max-width: 980px) {
   .app {
     grid-template-columns: 1fr;
@@ -39,8 +39,21 @@
     max-height: none;
   }
   .navbar__inner { padding: 0 var(--sp-4); gap: var(--sp-4); }
-  .nav { gap: 0; }
-  .nav__link { padding: 7px 10px; font-size: 12.5px; }
+
+  /* === Issue #1: Mobile navigation ===
+     Hide desktop nav links + GitHub button; show hamburger toggle.
+     Mobile drawer becomes visible (animated via .is-open on toggle). */
+  .nav--desktop { display: none; }
+  .navbar__github { display: none; }
+  .nav-toggle {
+    display: inline-flex;
+  }
+  /* Mobile drawer is rendered (no longer display:none) but slides off-canvas
+     via transform: translateX(100%). When .is-open is added it slides in. */
+  .nav--mobile {
+    display: flex;
+  }
+
   .footer__inner { grid-template-columns: 1fr; text-align: center; gap: var(--sp-3); }
   .footer__links { justify-content: center; }
   .footer__copy { text-align: center; }
@@ -52,10 +65,10 @@
   body { font-size: 13px; }
   .navbar__inner { padding: 0 var(--sp-3); gap: var(--sp-2); }
   .brand__name { font-size: 15px; }
-  .navbar__actions .btn span { display: none; }
-  .navbar__actions .btn { padding: 7px 10px; }
-  .nav { margin-left: auto; }
-  .nav__link { padding: 6px 8px; font-size: 12px; }
+  /* Issue #3: on mobile, logo stays clearly visible — slightly smaller
+     but still prominent. */
+  .brand__mark { height: 32px; }
+  .brand { gap: var(--sp-2); }
 
   .panel__header { padding: var(--sp-4); }
   .panel__body { padding: var(--sp-3); }

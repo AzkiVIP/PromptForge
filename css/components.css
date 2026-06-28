@@ -629,9 +629,15 @@
 .entry__btn--star.is-active { color: var(--warning); border-color: rgba(245, 158, 11, 0.4); }
 
 /* ---------- Brand sm (footer) ---------- */
-.brand__mark--sm { display: inline-flex; }
+.brand__mark--sm {
+  display: inline-flex;
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--r-sm);
+  flex-shrink: 0;
+}
 .brand__mark { display: inline-flex; border-radius: var(--r-sm); }
-.brand__mark--sm { width: 26px; height: 26px; }
 
 /* ---------- Field hints ---------- */
 .field__hint {

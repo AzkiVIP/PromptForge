@@ -1038,7 +1038,7 @@
   }
 
   /* ===========================================================
-     Navbar: smooth scroll + scroll-spy
+     Navbar: smooth scroll, scroll-spy, and mobile hamburger menu
      =========================================================== */
   function initNav() {
     const links = $all(".nav__link");
@@ -1051,11 +1051,13 @@
           if (el) {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
           }
+          // Issue #1: close mobile drawer when a nav item is selected
+          closeMobileNav();
         }
       });
     });
 
-    // Scroll spy: highlight active nav link
+    // Scroll spy: highlight active nav link (both desktop + mobile)
     const sections = ["generator", "history", "favorites"]
       .map(function (id) { return { id: id, el: document.getElementById(id) }; })
       .filter(function (s) { return s.el; });
@@ -1072,7 +1074,85 @@
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
+
+    // === Issue #1: Mobile hamburger menu wiring ===
+    initMobileNav();
   }
+
+  /* Mobile navigation drawer logic:
+     - Toggle button opens/closes the drawer
+     - Click on backdrop (outside drawer) closes it
+     - Click on any nav link inside drawer closes it (handled above)
+     - Escape key closes it
+     - Auto-close when viewport grows past the mobile breakpoint
+     - aria-expanded synced on the toggle button
+  */
+  function initMobileNav() {
+    const toggle = document.getElementById("navToggle");
+    const drawer = document.getElementById("mobileNav");
+    const backdrop = document.getElementById("navBackdrop");
+    if (!toggle || !drawer || !backdrop) return;
+
+    function open() {
+      drawer.classList.add("is-open");
+      backdrop.classList.add("is-open");
+      toggle.classList.add("is-open");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Close menu");
+      drawer.removeAttribute("hidden");
+      backdrop.removeAttribute("hidden");
+      // Lock body scroll while drawer is open
+      document.body.style.overflow = "hidden";
+    }
+
+    function close() {
+      drawer.classList.remove("is-open");
+      backdrop.classList.remove("is-open");
+      toggle.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      // Restore body scroll
+      document.body.style.overflow = "";
+      // After transition, hide from accessibility tree
+      setTimeout(function () {
+        if (!drawer.classList.contains("is-open")) drawer.setAttribute("hidden", "");
+        if (!backdrop.classList.contains("is-open")) backdrop.setAttribute("hidden", "");
+      }, 300);
+    }
+
+    // Expose closeMobileNav globally for initNav's link handler
+    closeMobileNav = close;
+
+    toggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (drawer.classList.contains("is-open")) close();
+      else open();
+    });
+
+    // Click outside (on backdrop) closes
+    backdrop.addEventListener("click", close);
+
+    // Escape closes
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && drawer.classList.contains("is-open")) {
+        close();
+        toggle.focus();
+      }
+    });
+
+    // Auto-close when resizing to desktop
+    let lastWidth = window.innerWidth;
+    window.addEventListener("resize", function () {
+      const w = window.innerWidth;
+      if (w > 980 && lastWidth <= 980 && drawer.classList.contains("is-open")) {
+        close();
+      }
+      lastWidth = w;
+    });
+  }
+
+  // Placeholder; replaced by initMobileNav's close() once initialized.
+  let closeMobileNav = function () {};
 
   /* ===========================================================
      Wire buttons

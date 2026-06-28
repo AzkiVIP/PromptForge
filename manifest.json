@@ -16,16 +16,34 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "assets/logo.png",
-      "sizes": "96x96",
+      "src": "assets/logo-192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "assets/favicon.png",
-      "sizes": "96x96",
+      "src": "assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo-192.png",
+      "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "assets/logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
@@ -34,21 +52,21 @@
       "short_name": "Generator",
       "description": "Open the prompt generator",
       "url": "./index.html#generator?utm_source=pwa_shortcut",
-      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "History",
       "short_name": "History",
       "description": "View prompt history",
       "url": "./index.html#history?utm_source=pwa_shortcut",
-      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192", "type": "image/png" }]
     },
     {
       "name": "Favorites",
       "short_name": "Favorites",
       "description": "View saved favorites",
       "url": "./index.html#favorites?utm_source=pwa_shortcut",
-      "icons": [{ "src": "assets/logo.png", "sizes": "96x96", "type": "image/png" }]
+      "icons": [{ "src": "assets/logo-192.png", "sizes": "192x192", "type": "image/png" }]
     }
   ]
 }

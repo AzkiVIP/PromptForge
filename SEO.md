@@ -208,7 +208,7 @@ Use these free tools to audit your SEO after deployment:
 
 **Fix**:
 1. Verify `https://azkivip.github.io/PromptForge/assets/og-image.png` loads.
-2. The current OG image is 96×96 — small but valid. For best results, use a 1200×630 image. To upgrade, replace `assets/og-image.png` with a 1200×630 PNG and update `og:image:width` and `og:image:height` in `index.html`.
+2. The OG image is 1200×630 — the recommended size for rich social previews.
 3. Use the [Meta Tags Debugger](https://metatags.io) to preview how the link will look when shared.
 
 ### Issue: Structured data errors in Search Console
@@ -272,7 +272,7 @@ PromptForge is built for performance, which is a Google ranking factor:
 - **CSS is split into 3 small files** (style, components, responsive) for cacheability.
 - **JavaScript is split into 6 small modules** (data, combobox, accordion, generator, history, app) loaded in order at the end of `<body>`.
 - **No render-blocking external scripts** — no analytics, no ads, no third-party fonts.
-- **Images are tiny SVG/PNG** (logo is 3 KB).
+- **Images are tiny PNG/ICO** (logo-512 is ~150 KB; favicon.ico is <1 KB).
 - **Mobile-responsive** with proper viewport meta tag.
 
 Expected Lighthouse scores: 95+ on Performance, 100 on Best Practices, 95+ on Accessibility, 100 on SEO.

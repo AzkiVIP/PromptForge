@@ -1,5 +1,9 @@
 # PromptForge
 
+<p align="center">
+  <img src="assets/banner.png" alt="PromptForge — Premium Visual Prompt Generator" width="640" />
+</p>
+
 > Premium open-source visual prompt generator. Craft cinematic, professional prompts for posters, thumbnails, ads, covers, wallpapers, concept art, character art, product renders, marketing assets, and AI image generation.
 
 Built with **HTML5, CSS3, and Vanilla JavaScript** — no frameworks, no build step, no dependencies. Just open `index.html` or host the folder on GitHub Pages.
@@ -10,16 +14,17 @@ Built with **HTML5, CSS3, and Vanilla JavaScript** — no frameworks, no build s
 
 - **Pure vanilla** — no React, Vue, jQuery, Tailwind, or any framework/library.
 - **Desktop-first app layout** — 40% generator / 60% output split, with **independent panel scrolling**. No long vertical form.
-- **Collapsible accordion sections** — only one large section open at a time.
+- **Mobile hamburger menu** — fully accessible drawer with backdrop, escape-to-close, and auto-close on link selection.
+- **Collapsible accordion sections** — independent (open multiple at once), no reserved space when collapsed.
 - **Smart searchable comboboxes** — fuzzy-search dropdowns with keyboard navigation, custom-input support, and option grouping.
 - **Rule-based generation engine** — not string concatenation. Auto-enriches prompts based on selected combinations (e.g. *Minecraft + Dark Fantasy + Epic + Volumetric Lighting* automatically adds *cinematic atmosphere, dramatic shadows, high detail environment, professional composition, epic fantasy mood*).
 - **AI presets** — ChatGPT Images, Flux, SDXL, Midjourney, Gemini. Each preset produces a prompt formatted for that model (natural-language vs tag-list vs `--ar` parameters).
 - **Color palette builder** — single / dual / multi modes, color picker + HEX input, live preview.
 - **Image uploads** — drag-and-drop reference images for Subject and Background.
 - **History + Favorites** — LocalStorage-backed, with restore, copy, star, and delete.
-- **SEO-ready** — `robots.txt`, `sitemap.xml`, `manifest.json`, Open Graph, Twitter Card, JSON-LD, SVG favicon.
-- **Responsive** — adapts gracefully from large desktop down to mobile.
-- **Accessible** — keyboard navigation, ARIA roles, reduced-motion support.
+- **SEO-ready** — `robots.txt`, `sitemap.xml`, `manifest.json`, Open Graph, Twitter Card, JSON-LD, multi-size PNG favicon + ICO.
+- **Responsive** — adapts gracefully from large desktop down to mobile, with hamburger menu at ≤980px.
+- **Accessible** — keyboard navigation, ARIA roles, reduced-motion support, focus management.
 
 ---
 
@@ -31,21 +36,28 @@ PromptForge/
 ├── manifest.json           # PWA manifest
 ├── robots.txt              # Crawler rules
 ├── sitemap.xml             # Sitemap
+├── SEO.md                  # Google indexing guide
 ├── README.md
 ├── css/
 │   ├── style.css           # Design tokens, base reset, navbar, layout, footer
 │   ├── components.css      # Accordion, combobox, chips, color picker, output, history
-│   └── responsive.css      # Tablet & mobile breakpoints
+│   └── responsive.css      # Tablet & mobile breakpoints (incl. hamburger menu)
 ├── js/
 │   ├── data.js             # All option libraries + rule-based enrichment KB
 │   ├── combobox.js         # Searchable combobox with fuzzy match
 │   ├── accordion.js        # Collapsible sections
 │   ├── generator.js        # Rule-based prompt engine
 │   ├── history.js          # LocalStorage history & favorites
-│   └── app.js              # Main wiring & UI behavior
+│   └── app.js              # Main wiring & UI behavior (incl. mobile nav)
 └── assets/
-    ├── favicon.svg
-    └── og-image.svg
+    ├── logo-cropped.png    # Tightest crop of the official logo (no padding)
+    ├── logo-192.png        # 192×192 PWA icon (icon fills ~87% of canvas)
+    ├── logo-512.png        # 512×512 PWA splash icon
+    ├── logo.png            # Alias of logo-512.png (legacy references)
+    ├── favicon.png         # 64×64 PNG favicon
+    ├── favicon.ico         # Multi-resolution ICO (16, 32, 48)
+    ├── og-image.png        # 1200×630 social preview image
+    └── banner.png          # 1280×320 README banner
 ```
 
 ---

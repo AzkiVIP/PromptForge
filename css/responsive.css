@@ -107,7 +107,7 @@
     flex-wrap: wrap;
   }
   .footer__links a { font-size: 14px; padding: 10px 8px; }
-  .footer_brand { align-items: center; }
+  .footer_brand { display: flex; justify-content: center; }
 
   .toast { bottom: 16px; left: 12px; right: 12px; transform: translateY(20px); max-width: none; }
   .toast.is-visible { transform: translateY(0); }

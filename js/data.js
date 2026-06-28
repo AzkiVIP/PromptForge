@@ -290,6 +290,186 @@
     }
   ];
 
+  /* ---------- Watermark Positions ---------- */
+  const WATERMARK_POSITIONS = [
+    { value: "Center",        phrase: "centered watermark" },
+    { value: "Top Center",    phrase: "top-center watermark" },
+    { value: "Bottom Center", phrase: "bottom-center watermark" },
+    { value: "Top Left",      phrase: "top-left watermark" },
+    { value: "Top Right",     phrase: "top-right watermark" },
+    { value: "Bottom Left",   phrase: "bottom-left watermark" },
+    { value: "Bottom Right",  phrase: "bottom-right watermark" },
+    { value: "Custom Position", phrase: "custom-position watermark" }
+  ];
+
+  /* ---------- Subject Importance ---------- */
+  const SUBJECT_IMPORTANCE = [
+    { value: "Primary",    phrase: "primary subject" },
+    { value: "Secondary",  phrase: "secondary subject" },
+    { value: "Tertiary",   phrase: "tertiary subject" },
+    { value: "Background", phrase: "background subject" }
+  ];
+
+  /* =========================================================
+     AUTO-TRANSLATION DICTIONARY (Issue #9)
+     Best-effort English → Indonesian word-by-word translation.
+     No external API. If a word isn't in the dictionary, it's
+     passed through unchanged. Indonesian input is detected and
+     passed through untouched.
+     ========================================================= */
+  const ID_MARKER_WORDS = [
+    "yang", "dan", "atau", "di", "ke", "dari", "untuk", "pada", "dengan",
+    "adalah", "ini", "itu", "saya", "kamu", "dia", "mereka", "kita",
+    "kami", "akan", "sudah", "telah", "bisa", "dapat", "harus", "juga",
+    "tidak", "bukan", "jangan", "seorang", "sebuah", "para", "sang",
+    "sih", "lah", "kah", "pun", "nya"
+  ];
+
+  const EN_ID_DICT = {
+    // articles / prepositions
+    "a": "seorang", "an": "seorang", "the": "", "of": "", "in": "di",
+    "on": "di", "at": "di", "with": "dengan", "and": "dan", "or": "atau",
+    "to": "ke", "from": "dari", "for": "untuk", "by": "oleh",
+    "under": "di bawah", "above": "di atas", "near": "dekat", "far": "jauh",
+    "into": "ke dalam", "onto": "ke atas", "over": "di atas", "between": "di antara",
+    "through": "melalui", "during": "selama", "before": "sebelum", "after": "setelah",
+    "is": "adalah", "are": "adalah", "was": "adalah", "were": "adalah",
+    "be": "menjadi", "being": "menjadi", "been": "telah menjadi",
+    "has": "memiliki", "have": "memiliki", "had": "memiliki",
+    "do": "melakukan", "does": "melakukan", "did": "melakukan",
+    "this": "ini", "that": "itu", "these": "ini", "those": "itu",
+    "as": "sebagai", "like": "seperti", "than": "dari", "then": "kemudian",
+    "but": "tapi", "however": "namun", "because": "karena", "so": "jadi",
+    "if": "jika", "when": "ketika", "while": "saat", "where": "di mana",
+    "what": "apa", "who": "siapa", "which": "yang mana",
+    // common nouns — nature / scene
+    "warrior": "prajurit", "soldier": "tentara", "knight": "kesatria",
+    "king": "raja", "queen": "ratu", "prince": "pangeran", "princess": "putri",
+    "wizard": "penyihir", "witch": "penyihir perempuan", "mage": "penyihir",
+    "hero": "pahlawan", "villain": "penjahat", "hunter": "pemburu",
+    "dragon": "naga", "monster": "monster", "demon": "iblis", "angel": "malaikat",
+    "ghost": "hantu", "spirit": "roh", "phoenix": "feniks", "unicorn": "unicorn",
+    "wolf": "serigala", "lion": "singa", "tiger": "harimau", "bear": "beruang",
+    "eagle": "elang", "hawk": "elang", "owl": "burung hantu", "raven": "gagak",
+    "horse": "kuda", "cat": "kucing", "dog": "anjing", "bird": "burung",
+    "fish": "ikan", "snake": "ular", "spider": "laba-laba",
+    "castle": "kastil", "fortress": "benteng", "tower": "menara", "cave": "gua",
+    "city": "kota", "village": "desa", "town": "kota kecil", "kingdom": "kerajaan",
+    "forest": "hutan", "jungle": "hutan belantara", "mountain": "gunung",
+    "ocean": "samudra", "sea": "laut", "river": "sungai", "lake": "danau",
+    "waterfall": "air terjun", "island": "pulau", "desert": "gurun",
+    "valley": "lembah", "cliff": "tebing", "rock": "batu", "stone": "batu",
+    "tree": "pohon", "flower": "bunga", "grass": "rumput", "leaf": "daun",
+    "sky": "langit", "cloud": "awan", "star": "bintang", "moon": "bulan",
+    "sun": "matahari", "planet": "planet", "galaxy": "galaksi",
+    "fire": "api", "water": "air", "wind": "angin", "earth": "tanah",
+    "ice": "es", "snow": "salju", "rain": "hujan", "storm": "badai",
+    "thunder": "guntur", "lightning": "kilat", "fog": "kabut", "mist": "kabut",
+    "light": "cahaya", "shadow": "bayangan", "darkness": "kegelapan",
+    "night": "malam", "day": "siang", "morning": "pagi", "evening": "sore",
+    "dawn": "fajar", "dusk": "senja", "midnight": "tengah malam", "noon": "tengah hari",
+    "sword": "pedang", "shield": "perisai", "bow": "busur", "arrow": "panah",
+    "axe": "kapak", "spear": "tombak", "dagger": "belati", "staff": "tongkat",
+    "armor": "baju zirah", "helmet": "helm", "crown": "mahkota", "cape": "jubah",
+    "robe": "jubah", "cloak": "mantel",
+    "book": "buku", "scroll": "gulungan", "crystal": "kristal", "gem": "permata",
+    "gold": "emas", "silver": "perak", "iron": "besi", "steel": "baja",
+    "wood": "kayu", "metal": "logam", "glass": "kaca", "silk": "sutra",
+    "ship": "kapal", "boat": "perahu", "car": "mobil", "cart": "gerobak",
+    "building": "gedung", "bridge": "jembatan", "road": "jalan", "path": "jalur",
+    "garden": "taman", "temple": "kuil", "church": "gereja", "shrine": "altar",
+    "throne": "tahta", "door": "pintu", "window": "jendela", "wall": "dinding",
+    "floor": "lantai", "ceiling": "langit-langit", "roof": "atap",
+    // adjectives
+    "beautiful": "indah", "ugly": "jelek", "dark": "gelap", "bright": "terang",
+    "epic": "epik", "mysterious": "misterius", "ancient": "kuno", "modern": "modern",
+    "futuristic": "futuristik", "magical": "magis", "mystical": "mistis",
+    "powerful": "kuat", "weak": "lemah", "brave": "berani", "cowardly": "penakut",
+    "lone": "kesepian", "solitary": "sendiri", "lonely": "kesepian",
+    "big": "besar", "small": "kecil", "huge": "raksasa", "tiny": "mungil",
+    "giant": "raksasa", "massive": "masif", "old": "tua", "new": "baru",
+    "young": "muda", "ancient": "kuno", "fresh": "segar",
+    "red": "merah", "blue": "biru", "green": "hijau", "yellow": "kuning",
+    "black": "hitam", "white": "putih", "purple": "ungu", "orange": "oranye",
+    "pink": "merah muda", "brown": "coklat", "gray": "abu-abu", "grey": "abu-abu",
+    "gold": "emas", "silver": "perak", "crimson": "merah tua", "scarlet": "merah cerah",
+    "azure": "biru langit", "emerald": "hijau zamrud", "violet": "ungu tua",
+    "tall": "tinggi", "short": "pendek", "wide": "lebar", "narrow": "sempit",
+    "long": "panjang", "round": "bulat", "square": "persegi", "sharp": "tajam",
+    "smooth": "halus", "rough": "kasar", "soft": "lembut", "hard": "keras",
+    "warm": "hangat", "cold": "dingin", "hot": "panas", "cool": "sejuk",
+    "fast": "cepat", "slow": "lambat", "quick": "cepat", "sudden": "mendadak",
+    // verbs / actions
+    "standing": "berdiri", "sitting": "duduk", "running": "berlari",
+    "walking": "berjalan", "flying": "terbang", "jumping": "melompat",
+    "fighting": "bertarung", "holding": "memegang", "looking": "melihat",
+    "wearing": "mengenakan", "carrying": "membawa", "wielding": "menggenggam",
+    "flying": "terbang", "swimming": "berenang", "climbing": "memanjat",
+    "falling": "jatuh", "rising": "naik", "glowing": "bersinar",
+    "burning": "membakar", "freezing": "membekukan", "shining": "bersinar",
+    "smiling": "tersenyum", "crying": "menangis", "laughing": "tertawa",
+    "sleeping": "tidur", "awake": "terjaga",
+    // misc
+    "with": "dengan", "without": "tanpa", "having": "memiliki",
+    "very": "sangat", "quite": "cukup", "extremely": "sangat",
+    "and": "dan", "but": "tapi", "also": "juga",
+    "two": "dua", "three": "tiga", "four": "empat", "five": "lima",
+    "six": "enam", "seven": "tujuh", "eight": "delapan", "nine": "sembilan",
+    "ten": "sepuluh", "many": "banyak", "few": "beberapa", "several": "beberapa",
+    "all": "semua", "each": "setiap", "every": "setiap",
+    "lone": "kesepian", "alone": "sendirian",
+    "cliff": "tebing", "edge": "tepi", "top": "atas", "bottom": "bawah",
+    "front": "depan", "back": "belakang", "side": "sisi",
+    "inside": "di dalam", "outside": "di luar",
+    "wearing": "mengenakan", "holding": "memegang"
+  };
+
+  /* Detect if a text appears to already be Indonesian.
+     Heuristic: if it contains ≥2 marker words, treat as Indonesian. */
+  function isIndonesian(text) {
+    if (!text) return true;
+    var words = text.toLowerCase().split(/[^a-z']+|(?=[A-Z])/).filter(Boolean);
+    if (words.length === 0) return true;
+    var hits = 0;
+    for (var i = 0; i < words.length; i++) {
+      if (ID_MARKER_WORDS.indexOf(words[i]) >= 0) hits++;
+      if (hits >= 2) return true;
+    }
+    return false;
+  }
+
+  /* Translate text to Indonesian using the dictionary.
+     Returns { translated: string, changed: bool, untranslated: array }. */
+  function translateToIndonesian(text) {
+    if (!text || !text.trim()) {
+      return { translated: text || "", changed: false, untranslated: [] };
+    }
+    if (isIndonesian(text)) {
+      return { translated: text, changed: false, untranslated: [] };
+    }
+    var untranslated = [];
+    // Preserve non-word segments (punctuation, etc.) by tokenizing
+    var tokens = text.split(/(\s+|[^\w\s'-]+)/);
+    var out = tokens.map(function (tok) {
+      if (!tok) return tok;
+      // Skip whitespace and punctuation
+      if (/^[\s]+$/.test(tok) || /^[^\w]+$/.test(tok)) return tok;
+      var lower = tok.toLowerCase();
+      if (EN_ID_DICT.hasOwnProperty(lower)) {
+        var replacement = EN_ID_DICT[lower];
+        // Preserve capitalization of first letter
+        if (tok[0] && tok[0] === tok[0].toUpperCase() && replacement) {
+          replacement = replacement.charAt(0).toUpperCase() + replacement.slice(1);
+        }
+        return replacement;
+      }
+      untranslated.push(tok);
+      return tok;
+    });
+    var translated = out.join("").replace(/\s+/g, " ").replace(/\s+([.,;:!?])/g, "$1").trim();
+    return { translated: translated, changed: true, untranslated: untranslated };
+  }
+
   /* =========================================================
      RULE-BASED ENRICHMENT KNOWLEDGE BASE
      Each rule: when any "trigger" keyword matches a selected
@@ -425,10 +605,14 @@
     RENDERING_QUALITY,
     PROMPT_EXPANSION,
     AI_PRESETS,
+    WATERMARK_POSITIONS,
+    SUBJECT_IMPORTANCE,
     ENRICHMENT_RULES,
     NEGATIVE_BASE,
     NEGATIVE_BY_MOOD,
-    colorName
+    colorName,
+    translateToIndonesian,
+    isIndonesian
   };
 
 })(typeof window !== "undefined" ? window : this);

@@ -1,52 +1,58 @@
 /* =========================================================
    PromptForge — accordion.js
    Collapsible accordion sections. Compact collapsed state,
-   expanded shows controls. Only one large section at a time.
+   expanded shows controls. Sections are INDEPENDENT — opening
+   one does NOT close another.
+
+   Overflow strategy:
+   - Closed: max-height:0 + overflow:hidden → fully hidden, no reserved space.
+   - During expand/collapse animation: overflow:hidden (set by CSS).
+   - After expand animation completes: JS adds .is-settled which switches
+     overflow to visible — lets combobox dropdowns escape the accordion body.
+   - When starting to collapse: JS removes .is-settled first.
    ========================================================= */
 (function (global) {
   "use strict";
 
+  var SETTLE_DELAY = 300; // matches CSS transition duration
+
   function init(scope) {
     scope = scope || document;
-    const accordions = Array.from(scope.querySelectorAll(".accordion"));
+    var accordions = Array.prototype.slice.call(scope.querySelectorAll(".accordion"));
 
     accordions.forEach(function (acc) {
-      const head = acc.querySelector(".accordion__head");
+      var head = acc.querySelector(".accordion__head");
       if (!head) return;
-
-      // Default the first accordion to open
-      // (handled by HTML's aria-expanded, but ensure visual sync)
       if (head.getAttribute("aria-expanded") === "true") {
-        acc.classList.add("is-open");
+        acc.classList.add("is-open", "is-settled");
       }
 
       head.addEventListener("click", function () {
-        const wasOpen = acc.classList.contains("is-open");
-
-        // Single-open-at-a-time: close siblings within same panel
-        const panel = acc.closest(".panel__body");
-        if (panel) {
-          panel.querySelectorAll(".accordion.is-open").forEach(function (other) {
-            if (other !== acc) {
-              other.classList.remove("is-open");
-              const h = other.querySelector(".accordion__head");
-              if (h) h.setAttribute("aria-expanded", "false");
-            }
-          });
-        }
-
+        var wasOpen = acc.classList.contains("is-open");
         if (wasOpen) {
-          acc.classList.remove("is-open");
-          head.setAttribute("aria-expanded", "false");
+          // Start collapsing: remove settled first so overflow becomes hidden again
+          acc.classList.remove("is-settled");
+          // Allow one frame so the browser applies overflow:hidden before max-height transitions
+          requestAnimationFrame(function () {
+            acc.classList.remove("is-open");
+            head.setAttribute("aria-expanded", "false");
+          });
         } else {
+          // Expanding: open immediately, add settled after animation completes
           acc.classList.add("is-open");
           head.setAttribute("aria-expanded", "true");
-          // Scroll the just-opened accordion into view inside its panel
+          // Clear any pending settle timer
+          if (acc._settleTimer) {
+            clearTimeout(acc._settleTimer);
+          }
+          acc._settleTimer = setTimeout(function () {
+            acc.classList.add("is-settled");
+            acc._settleTimer = null;
+          }, SETTLE_DELAY);
           scrollIntoPanel(acc);
         }
       });
 
-      // Keyboard support
       head.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
@@ -56,15 +62,13 @@
     });
 
     function scrollIntoPanel(acc) {
-      // Find the scrollable parent (.panel__body)
-      let parent = acc.parentElement;
+      var parent = acc.parentElement;
       while (parent && !parent.classList.contains("panel__body")) {
         parent = parent.parentElement;
       }
       if (!parent) return;
-      const accRect = acc.getBoundingClientRect();
-      const parentRect = parent.getBoundingClientRect();
-      // If accordion head is not visible, scroll it into view (top alignment)
+      var accRect = acc.getBoundingClientRect();
+      var parentRect = parent.getBoundingClientRect();
       if (accRect.top < parentRect.top + 8 || accRect.bottom > parentRect.bottom - 8) {
         parent.scrollTo({
           top: parent.scrollTop + (accRect.top - parentRect.top) - 12,
@@ -77,14 +81,14 @@
   function open(acc) {
     if (typeof acc === "string") acc = document.querySelector('[data-section="' + acc + '"]');
     if (!acc) return;
-    const head = acc.querySelector(".accordion__head");
+    var head = acc.querySelector(".accordion__head");
     if (!acc.classList.contains("is-open")) head.click();
   }
 
   function close(acc) {
     if (typeof acc === "string") acc = document.querySelector('[data-section="' + acc + '"]');
     if (!acc) return;
-    const head = acc.querySelector(".accordion__head");
+    var head = acc.querySelector(".accordion__head");
     if (acc.classList.contains("is-open")) head.click();
   }
 

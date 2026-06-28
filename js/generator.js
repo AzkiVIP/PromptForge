@@ -76,7 +76,9 @@
       state.lighting,
       state.background,
       state.mood,
-      state.typography
+      state.typography,
+      (state.subjects || []).map(function (s) { return s.text; }).join(" "),
+      state.customEffects
     ].filter(Boolean).join(" ").toLowerCase();
 
     D.ENRICHMENT_RULES.forEach(function (rule) {
@@ -89,10 +91,29 @@
     return uniq(enrichment);
   }
 
+  /* Build a subject phrase from the multiple-subjects list, applying
+     importance and Indonesian translation. */
+  function buildSubjectPhrase(state) {
+    var subjects = state.subjects || [];
+    var valid = subjects.filter(function (s) { return s && s.text && s.text.trim(); });
+    if (valid.length === 0) return null;
+    if (valid.length === 1) {
+      return D.translateToIndonesian(valid[0].text).translated;
+    }
+    // Multiple subjects: join with importance labels
+    var parts = valid.map(function (s, i) {
+      var translated = D.translateToIndonesian(s.text).translated;
+      var importance = s.importance || (i === 0 ? "Primary" : "Secondary");
+      var impPhrase = (D.SUBJECT_IMPORTANCE.find(function (x) { return x.value === importance; }) || {}).phrase || "subject";
+      return impPhrase + ": " + translated;
+    });
+    return parts.join("; ");
+  }
+
   /* Build the structured prompt payload */
   function buildPayload(state) {
     const parts = {
-      subject:   state.subjectText || null,
+      subject:   buildSubjectPhrase(state),
       project:   projectTypePhrase(state.projectTypeCategory, state.projectTypePreset, state.projectTypeCustom),
       style:     state.artStyle ? phraseFor("artStyle", state.artStyle) : (state.artStyleCustom || null),
       camera:    state.cameraAngle ? phraseFor("cameraAngle", state.cameraAngle) : (state.cameraAngleCustom || null),
@@ -101,8 +122,11 @@
       mood:      state.mood ? phraseFor("mood", state.mood) : (state.moodCustom || null),
       typo:      state.typography ? phraseFor("typography", state.typography) : (state.typographyCustom || null),
       effects:   (state.effects || []).map(function (v) { return phraseFor("effects", v); }),
+      customEffects: state.customEffects ? state.customEffects.split(/[,;]+/).map(function (s) { return s.trim(); }).filter(Boolean) : [],
       composition: state.composition ? phraseFor("composition", state.composition) : null,
-      colors:    state.colors && state.colors.length ? state.colors.slice() : []
+      colors:    state.colors && state.colors.length ? state.colors.slice() : [],
+      watermark: buildWatermarkPhrase(state),
+      additional: state.additionalDescription && state.additionalDescription.trim() ? D.translateToIndonesian(state.additionalDescription).translated : null
     };
 
     const enrich = applyRules(state);
@@ -112,9 +136,24 @@
     const rqBoost = rq ? rq.boost.slice() : [];
 
     // Expansion level
-    const exp = (D.PROMPT_EXPANSION.find(function (e) { return e.value === state.promptExpansion; }) || {}).weight || 1;
+    const exp = (D.PROMPT_EXPANSION.find(function (e) { return e.value === state.promptExpansion; }) || {}).weight || 0;
 
     return { parts: parts, enrich: enrich, rqBoost: rqBoost, expansion: exp };
+  }
+
+  /* Compose watermark instruction phrase */
+  function buildWatermarkPhrase(state) {
+    var text = state.watermarkText && state.watermarkText.trim();
+    if (!text) return null;
+    var pos = state.watermarkPosition || "Bottom Right";
+    var posPhrase = (D.WATERMARK_POSITIONS.find(function (p) { return p.value === pos; }) || {}).phrase || "bottom-right watermark";
+    var customPos = state.watermarkCustomPosition && state.watermarkCustomPosition.trim();
+    var translatedText = D.translateToIndonesian(text).translated;
+    var phrase = 'watermark text "' + translatedText + '" at ' + posPhrase;
+    if (customPos && pos === "Custom Position") {
+      phrase += ' (' + customPos + ')';
+    }
+    return phrase;
   }
 
   /* Compose natural-language prompt (ChatGPT / Flux / Gemini) */
@@ -139,8 +178,10 @@
     if (p.parts.mood) scene.push("evoking " + article(p.parts.mood) + " " + p.parts.mood);
     if (scene.length) segs.push(scene.join(", "));
 
-    if (p.parts.effects && p.parts.effects.length) {
-      segs.push("with " + p.parts.effects.join(", "));
+    // Combined effects (built-in + custom)
+    var allEffects = (p.parts.effects || []).concat(p.parts.customEffects || []);
+    if (allEffects.length) {
+      segs.push("with " + allEffects.join(", "));
     }
     if (p.parts.composition) segs.push(p.parts.composition);
 
@@ -161,11 +202,19 @@
 
     if (tail.length) segs.push(uniq(tail).join(", "));
 
+    // Watermark instruction
+    if (p.parts.watermark) segs.push(p.parts.watermark);
+
     // Capitalize first letter, end with period
     let s = segs.filter(Boolean).join(", ").trim();
     if (s) {
       s = s.charAt(0).toUpperCase() + s.slice(1);
       if (!/[.!?]$/.test(s)) s += ".";
+    }
+
+    // Append additional description verbatim
+    if (p.parts.additional) {
+      s = s ? s + " " + p.parts.additional : p.parts.additional;
     }
     return s;
   }
@@ -181,6 +230,7 @@
     if (p.parts.bg) tags.push(p.parts.bg);
     if (p.parts.mood) tags.push(p.parts.mood);
     if (p.parts.effects && p.parts.effects.length) tags.push.apply(tags, p.parts.effects);
+    if (p.parts.customEffects && p.parts.customEffects.length) tags.push.apply(tags, p.parts.customEffects);
     if (p.parts.composition) tags.push(p.parts.composition);
     if (p.parts.colors.length) {
       const names = p.parts.colors.map(function (c) { return D.colorName(c) + " tones"; });
@@ -193,7 +243,13 @@
     if (p.expansion >= 2) tags.push("professional color grading", "tight art direction");
     if (p.expansion >= 3) tags.push("intricate surface detail", "layered depth", "cinematic lens characteristics");
 
-    return uniq(tags).join(", ");
+    if (p.parts.watermark) tags.push(p.parts.watermark);
+
+    var s = uniq(tags).join(", ");
+    if (p.parts.additional) {
+      s = s ? s + ". " + p.parts.additional : p.parts.additional;
+    }
+    return s;
   }
 
   /* Compose Midjourney-style: natural-ish + --params */
@@ -202,11 +258,20 @@
     const preset = D.AI_PRESETS.find(function (a) { return a.value === "Midjourney"; });
     // Stylize / quality
     const qualityMap = { Standard: " --q 1", High: " --q 2", Ultra: " --q 2 --stylize 500", Masterpiece: " --q 2 --stylize 750" };
-    base += (qualityMap[state.renderingQuality] || "");
-    if (state.aspectRatio) {
+    if (state.renderingQuality && qualityMap[state.renderingQuality]) base += qualityMap[state.renderingQuality];
+    // Custom resolution overrides --ar
+    if (state.customResolution && state.customResolution.trim()) {
+      var cr = state.customResolution.trim().toLowerCase().replace(/\s/g, "");
+      // Normalize 1920x1080 / 1920×1080 / 1920*1080 → 1920:1080
+      cr = cr.replace(/[x×*]/g, ":");
+      if (/^\d+:\d+$/.test(cr)) {
+        base += " --ar " + cr;
+      } else {
+        base += ' --ar ' + cr; // pass through as-is
+      }
+    } else if (state.aspectRatio) {
       const ar = D.ASPECT_RATIOS.find(function (a) { return a.value === state.aspectRatio; });
       if (ar) {
-        // MJ uses pure W:H
         const parts = ar.value.split(":");
         if (parts.length === 2) base += " --ar " + parts[0] + ":" + parts[1];
         else base += " --ar 3:4"; // A4/A3 fallback
@@ -222,13 +287,23 @@
     if (state.mood && D.NEGATIVE_BY_MOOD[state.mood]) {
       neg.push.apply(neg, D.NEGATIVE_BY_MOOD[state.mood]);
     }
-    if (state.effects && state.effects.length === 0) {
+    if (state.effects && state.effects.length === 0 && !(state.customEffects && state.customEffects.trim())) {
       neg.push("excessive particle effects", "cluttered foreground");
     }
-    let out = uniq(neg).join(", ");
+    // If watermark text is set, ensure the negative doesn't include "watermark"
+    // (since we want a watermark, we should NOT add it to the negative list)
+    var filtered = neg.filter(function (n) { return !/watermark/.test(n); });
+    let out = uniq(filtered).join(", ");
 
     const preset = D.AI_PRESETS.find(function (a) { return a.value === aiPreset; });
-    if (preset && preset.negativeSuffix) out += preset.negativeSuffix;
+    if (preset && preset.negativeSuffix) {
+      // If user explicitly wants a watermark, strip "watermark" from SDXL negative suffix too
+      var suffix = preset.negativeSuffix;
+      if (state.watermarkText && state.watermarkText.trim()) {
+        suffix = suffix.replace(/,?\s*watermark/gi, "");
+      }
+      out += suffix;
+    }
 
     return out;
   }
@@ -245,19 +320,30 @@
       const ar = D.ASPECT_RATIOS.find(function (a) { return a.value === state.aspectRatio; });
       if (ar) aspectTag = ar.param;
     }
+    // Custom resolution overrides aspect tag
+    let resolutionTag = aspectTag;
+    if (state.customResolution && state.customResolution.trim()) {
+      var cr = state.customResolution.trim().toLowerCase().replace(/\s/g, "").replace(/[x×*]/g, ":");
+      if (/^\d+:\d+$/.test(cr)) {
+        resolutionTag = "--ar " + cr + " (" + state.customResolution.trim() + ")";
+      } else {
+        resolutionTag = state.customResolution.trim();
+      }
+    }
 
     if (preset.value === "Midjourney") {
       prompt = composeMidjourney(payload, state);
       // Midjourney already includes --ar inline
     } else if (preset.value === "SDXL") {
       prompt = composeTagList(payload);
-      if (aspectTag) prompt += "  (" + aspectTag + ")";
+      if (resolutionTag) prompt += "  (" + resolutionTag + ")";
       prompt += preset.suffix;
     } else {
       // ChatGPT / Flux / Gemini — natural language
       prompt = composeNatural(payload);
-      if (aspectTag && preset.preferNatural) {
-        prompt += " Aspect ratio " + state.aspectRatio + ".";
+      if (resolutionTag && preset.preferNatural) {
+        var ratioLabel = state.customResolution && state.customResolution.trim() ? state.customResolution.trim() : state.aspectRatio;
+        prompt += " Aspect ratio / resolution: " + ratioLabel + ".";
       }
     }
 
@@ -266,10 +352,18 @@
     // Build meta info
     const meta = [];
     if (state.aiPreset) meta.push({ label: "Preset", value: state.aiPreset });
-    if (state.aspectRatio) meta.push({ label: "Ratio", value: state.aspectRatio });
+    if (state.customResolution && state.customResolution.trim()) {
+      meta.push({ label: "Resolution", value: state.customResolution.trim() });
+    } else if (state.aspectRatio) {
+      meta.push({ label: "Ratio", value: state.aspectRatio });
+    }
     if (state.renderingQuality) meta.push({ label: "Quality", value: state.renderingQuality });
     if (state.promptExpansion) meta.push({ label: "Expansion", value: state.promptExpansion });
     if (payload.enrich.length) meta.push({ label: "Auto-enrichments", value: String(payload.enrich.length) });
+    if (state.subjects && state.subjects.filter(function (s) { return s.text && s.text.trim(); }).length) {
+      meta.push({ label: "Subjects", value: String(state.subjects.filter(function (s) { return s.text && s.text.trim(); }).length) });
+    }
+    if (state.watermarkText && state.watermarkText.trim()) meta.push({ label: "Watermark", value: state.watermarkPosition || "Bottom Right" });
 
     return {
       prompt: prompt,

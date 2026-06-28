@@ -10,7 +10,7 @@
   border-radius: var(--r-lg);
   background: var(--surface);
   margin-bottom: var(--sp-3);
-  overflow: hidden;
+  overflow: hidden;            /* clip rounded corners only — accordion__body handles its own clipping */
   transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .accordion.is-open {
@@ -49,17 +49,24 @@
 }
 .accordion.is-open .accordion__chevron { transform: rotate(180deg); color: var(--accent); }
 
+/* Accordion body — collapses to ZERO height with proper overflow:hidden.
+   When open, switches to overflow:visible AFTER the expand animation
+   finishes (via .is-settled class added by JS) so that combobox dropdowns
+   inside can extend beyond the accordion's bottom edge. */
 .accordion__body {
   max-height: 0;
+  height: 0;
   overflow: hidden;
   transition: max-height 280ms var(--ease);
 }
-.accordion.is-open .accordion__body { max-height: 1600px; }
-.accordion__body-inner,
-.accordion__body {
-  /* padding set via wrapper below */
+.accordion.is-open .accordion__body {
+  max-height: 2400px;
+  height: auto;
 }
-.accordion__body { padding: 0; }
+.accordion.is-open.is-settled .accordion__body {
+  overflow: visible;
+}
+
 .accordion__body > .field,
 .accordion__body > .seg,
 .accordion__body > .color-row,
@@ -67,9 +74,10 @@
 .accordion__body > .chip-grid,
 .accordion__body > .ratio-grid,
 .accordion__body > .dropzone,
-.accordion__body > .previews { padding: 0 16px; }
+.accordion__body > .previews,
+.accordion__body > .subjects { padding: 0 16px; }
 .accordion__body .field:first-child { padding-top: 4px; }
-.accordion__body { padding-bottom: 16px; }
+.accordion.is-open .accordion__body { padding-bottom: 16px; }
 .accordion__body > .field:last-child { margin-bottom: 0; }
 .accordion__body .previews { padding-top: 8px; padding-bottom: 0; }
 
@@ -104,18 +112,15 @@
 .combobox.is-open .combobox__caret { transform: rotate(180deg); color: var(--accent); }
 
 .combobox__panel {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
-  z-index: 40;
+  position: fixed;             /* set by JS — escapes all parent overflow:hidden */
+  z-index: 1000;
   background: var(--surface-3);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   box-shadow: var(--shadow-lg);
   display: none;
   flex-direction: column;
-  max-height: 340px;
+  max-height: min(420px, 60vh);
   overflow: hidden;
 }
 .combobox.is-open .combobox__panel { display: flex; }
@@ -123,6 +128,7 @@
   padding: var(--sp-2);
   border-bottom: 1px solid var(--border-soft);
   position: relative;
+  flex-shrink: 0;
 }
 .combobox__search-icon {
   position: absolute;
@@ -148,7 +154,8 @@
   margin: 0;
   padding: 4px;
   overflow-y: auto;
-  max-height: 260px;
+  flex: 1;
+  min-height: 0;
 }
 .combobox__group {
   font-size: 10.5px;
@@ -602,3 +609,85 @@
 
 /* ---------- Brand sm (footer) ---------- */
 .brand__mark--sm { display: inline-flex; }
+.brand__mark { display: inline-flex; border-radius: var(--r-sm); }
+.brand__mark--sm { width: 26px; height: 26px; }
+
+/* ---------- Field hints ---------- */
+.field__hint {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: var(--text-faint);
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+/* ---------- Subjects (multi-subject list) ---------- */
+.subjects {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+.subjects:empty + .subjects__add { margin-top: 0; }
+.subject-row {
+  display: grid;
+  grid-template-columns: 24px 1fr 140px auto;
+  gap: var(--sp-2);
+  align-items: center;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 6px 8px;
+}
+.subject-row__index {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-faint);
+  text-align: center;
+}
+.subject-row__input {
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 13px;
+  padding: 4px 6px;
+  outline: none;
+  width: 100%;
+}
+.subject-row__input::placeholder { color: var(--text-faint); }
+.subject-row__importance {
+  background: var(--surface-3);
+  border: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  padding: 4px 6px;
+  border-radius: var(--r-sm);
+  outline: none;
+  cursor: pointer;
+}
+.subject-row__importance:focus { border-color: var(--accent); }
+.subject-row__actions {
+  display: inline-flex;
+  gap: 2px;
+}
+.subject-row__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all var(--dur) var(--ease);
+}
+.subject-row__btn:hover {
+  background: var(--surface-3);
+  color: var(--text);
+  border-color: var(--border);
+}
+.subject-row__btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.subject-row__btn--danger:hover { color: var(--danger); border-color: rgba(239, 68, 68, 0.4); }
+.subjects__add { margin-top: var(--sp-2); }

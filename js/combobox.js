@@ -270,7 +270,15 @@
       state.query = "";
       search.value = "";
       render();
-      setTimeout(function () { search.focus(); }, 20);
+      positionPanel();
+      // Re-position after layout settles (offsetHeight accurate now)
+      requestAnimationFrame(function () {
+        positionPanel();
+        search.focus();
+      });
+      // Reposition on scroll/resize; close if the trigger is no longer visible
+      window.addEventListener("scroll", onWindowScroll, true);
+      window.addEventListener("resize", onWindowResize);
     }
 
     function close() {
@@ -278,6 +286,44 @@
       state.open = false;
       rootEl.classList.remove("is-open");
       trigger.setAttribute("aria-expanded", "false");
+      window.removeEventListener("scroll", onWindowScroll, true);
+      window.removeEventListener("resize", onWindowResize);
+    }
+
+    /* Position the panel below the trigger using position:fixed so it
+       escapes any parent overflow:hidden / overflow:auto containers. */
+    function positionPanel() {
+      var rect = trigger.getBoundingClientRect();
+      var panelHeight = panel.offsetHeight || 380;
+      var panelWidth = rect.width;
+      var spaceBelow = window.innerHeight - rect.bottom;
+      var spaceAbove = rect.top;
+      var top;
+      // Flip above if not enough room below and more room above
+      if (spaceBelow < panelHeight + 16 && spaceAbove > spaceBelow) {
+        top = Math.max(8, rect.top - panelHeight - 4);
+      } else {
+        top = rect.bottom + 4;
+      }
+      var left = Math.max(8, Math.min(rect.left, window.innerWidth - panelWidth - 8));
+      panel.style.top = top + "px";
+      panel.style.left = left + "px";
+      panel.style.width = panelWidth + "px";
+    }
+
+    function onWindowScroll() {
+      if (!state.open) return;
+      // Reposition while open; close if trigger scrolled out of view
+      var rect = trigger.getBoundingClientRect();
+      if (rect.bottom < -50 || rect.top > window.innerHeight + 50) {
+        close();
+      } else {
+        positionPanel();
+      }
+    }
+    function onWindowResize() {
+      if (!state.open) return;
+      positionPanel();
     }
 
     /* ---------- Events ---------- */

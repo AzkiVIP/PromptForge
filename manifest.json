@@ -12,10 +12,16 @@
   "categories": ["productivity", "design", "utilities"],
   "icons": [
     {
-      "src": "assets/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "assets/logo.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [

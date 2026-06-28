@@ -10,22 +10,23 @@
   const { ComboBox, Accordion, Generator, History } = global.PF;
 
   /* ===========================================================
-     Central app state
+     Central app state — ALL fields start empty/null (Issue #1).
+     User must select/enter everything manually.
      =========================================================== */
   const state = {
-    projectTypeCategory: "Gaming",
-    projectTypePreset:   "Minecraft",
+    projectTypeCategory: null,
+    projectTypePreset:   null,
     projectTypeCustom:   "",
-    subjectText:         "",
-    subjectImages:       [], // dataURLs
+    subjects:            [],   // [{id, text, importance}] (Issue #10)
+    subjectImages:       [],   // dataURLs
     artStyle:            null,
     artStyleCustom:      "",
     cameraAngle:         null,
     cameraAngleCustom:   "",
     lighting:            null,
     lightingCustom:      "",
-    colorMode:           "single", // single | dual | multi
-    colors:              ["#3B82F6"],
+    colorMode:           "single", // single | dual | multi (mode is structural, not a content selection)
+    colors:              [],   // empty by default
     background:          null,
     backgroundCustom:    "",
     backgroundImages:    [],
@@ -33,12 +34,18 @@
     moodCustom:          "",
     typography:          null,
     typographyCustom:    "",
-    effects:             [], // multi
-    aspectRatio:         "16:9",
-    composition:         null, // single
-    renderingQuality:    "High", // default
-    promptExpansion:     "Detailed",
-    aiPreset:            "ChatGPT Images",
+    effects:             [],        // multi
+    customEffects:       "",        // Issue #6 — comma-separated free text
+    watermarkPosition:   null,      // Issue #8
+    watermarkCustomPosition: "",
+    watermarkText:       "",
+    aspectRatio:         null,      // empty by default
+    customResolution:    "",        // Issue #11 — e.g. "1920x1080"
+    composition:         null,
+    renderingQuality:    null,
+    promptExpansion:     null,
+    aiPreset:            null,
+    additionalDescription: "",      // Issue #12
     // last generated
     lastResult:          null
   };
@@ -119,14 +126,10 @@
         rebuildProjectTypePresets(val);
       }
     });
-    combos.projectTypeCategory.setValue(state.projectTypeCategory);
+    // No default selection — Issue #1: every field starts empty.
 
-    // Preset combobox (initial) — rebuilt by setValue above; ensure default applied
-    setTimeout(function () {
-      if (state.projectTypePreset && combos.projectTypePreset) {
-        combos.projectTypePreset.setValue(state.projectTypePreset);
-      }
-    }, 0);
+    // Preset combobox (initial — empty)
+    rebuildProjectTypePresets(null);
 
     // Art Style
     combos.artStyle = ComboBox.create(artStyleEl, {
@@ -206,14 +209,22 @@
      =========================================================== */
   function bindInputs() {
     const map = {
-      "projectType-custom":   "projectTypeCustom",
-      "subject-text":         "subjectText",
-      "artStyle-custom":      "artStyleCustom",
-      "cameraAngle-custom":   "cameraAngleCustom",
-      "lighting-custom":      "lightingCustom",
-      "background-custom":    "backgroundCustom",
-      "mood-custom":          "moodCustom",
-      "typography-custom":    "typographyCustom"
+      "projectType-custom":      "projectTypeCustom",
+      "artStyle-custom":         "artStyleCustom",
+      "cameraAngle-custom":      "cameraAngleCustom",
+      "lighting-custom":         "lightingCustom",
+      "background-custom":       "backgroundCustom",
+      "mood-custom":             "moodCustom",
+      "typography-custom":       "typographyCustom",
+      // Issue #6: Custom Effects (comma-separated)
+      "effects-custom":          "customEffects",
+      // Issue #8: Watermark
+      "watermark-custom-pos":    "watermarkCustomPosition",
+      "watermark-text":          "watermarkText",
+      // Issue #11: Custom Resolution
+      "custom-resolution":       "customResolution",
+      // Issue #12: Additional Description
+      "additional-desc":         "additionalDescription"
     };
     Object.keys(map).forEach(function (id) {
       const el = document.getElementById(id);
@@ -242,10 +253,26 @@
       const max = maxForMode(state.colorMode);
       // Trim if needed
       if (state.colors.length > max) state.colors.length = max;
-      // Ensure at least one slot
-      if (state.colors.length === 0) state.colors.push("#3B82F6");
+      // Issue #1: do NOT auto-add a default color. Empty palette stays empty
+      // until the user picks one. We render a single "add color" tile when empty.
 
       colorRow.innerHTML = "";
+      if (state.colors.length === 0) {
+        const addTile = document.createElement("button");
+        addTile.className = "btn btn--ghost btn--sm color-row__add-tile";
+        addTile.type = "button";
+        addTile.innerHTML =
+          '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>' +
+          ' Add color';
+        addTile.addEventListener("click", function () {
+          state.colors.push("#3B82F6");
+          renderSlots();
+          renderPreview();
+          syncAddBtn();
+        });
+        colorRow.appendChild(addTile);
+        return;
+      }
       state.colors.forEach(function (c, i) {
         const slot = document.createElement("div");
         slot.className = "color-slot";
@@ -409,6 +436,160 @@
     if (state.aiPreset) c.activate(state.aiPreset);
   }
 
+  /* Issue #8 — Watermark position chip grid (single-select). */
+  function initWatermarkPosition() {
+    const el = $("#watermarkPosGrid");
+    if (!el) return;
+    el.innerHTML = "";
+    D.WATERMARK_POSITIONS.forEach(function (item) {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chip";
+      chip.textContent = item.value;
+      chip.dataset.value = item.value;
+      if (state.watermarkPosition === item.value) chip.classList.add("is-active");
+      chip.addEventListener("click", function () {
+        $all(".chip", el).forEach(function (c) {
+          if (c !== chip) c.classList.remove("is-active");
+        });
+        chip.classList.toggle("is-active");
+        if (chip.classList.contains("is-active")) {
+          state.watermarkPosition = item.value;
+        } else {
+          state.watermarkPosition = null;
+        }
+      });
+      el.appendChild(chip);
+    });
+  }
+
+  /* ===========================================================
+     Issue #10 — Multiple Subjects
+     =========================================================== */
+  function makeSubjectId() {
+    return "subj_" + Date.now().toString(36) + "_" + Math.random().toString(36).slice(2, 6);
+  }
+
+  function renderSubjects() {
+    const list = $("#subjectsList");
+    if (!list) return;
+    list.innerHTML = "";
+    if (state.subjects.length === 0) {
+      const empty = document.createElement("div");
+      empty.className = "history__empty";
+      empty.style.padding = "12px";
+      empty.textContent = "No subjects yet. Click \"Add Subject\" to begin.";
+      list.appendChild(empty);
+      return;
+    }
+    state.subjects.forEach(function (s, i) {
+      const row = document.createElement("div");
+      row.className = "subject-row";
+      row.dataset.id = s.id;
+
+      const indexEl = document.createElement("div");
+      indexEl.className = "subject-row__index";
+      indexEl.textContent = String(i + 1);
+
+      const inputEl = document.createElement("input");
+      inputEl.type = "text";
+      inputEl.className = "subject-row__input";
+      inputEl.placeholder = "e.g. Minecraft Warrior";
+      inputEl.value = s.text || "";
+      inputEl.addEventListener("input", function () {
+        s.text = inputEl.value;
+      });
+
+      const impEl = document.createElement("select");
+      impEl.className = "subject-row__importance";
+      var defaultImp = s.importance || (["Primary", "Secondary", "Tertiary", "Background"][i] || "Background");
+      D.SUBJECT_IMPORTANCE.forEach(function (opt) {
+        const o = document.createElement("option");
+        o.value = opt.value;
+        o.textContent = opt.value;
+        if (defaultImp === opt.value) o.selected = true;
+        impEl.appendChild(o);
+      });
+      impEl.addEventListener("change", function () {
+        s.importance = impEl.value;
+      });
+      s.importance = defaultImp;
+
+      const actions = document.createElement("div");
+      actions.className = "subject-row__actions";
+
+      const upBtn = document.createElement("button");
+      upBtn.type = "button";
+      upBtn.className = "subject-row__btn";
+      upBtn.setAttribute("aria-label", "Move up");
+      upBtn.disabled = (i === 0);
+      upBtn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>';
+      upBtn.addEventListener("click", function () {
+        if (i === 0) return;
+        const tmp = state.subjects[i - 1];
+        state.subjects[i - 1] = state.subjects[i];
+        state.subjects[i] = tmp;
+        renderSubjects();
+      });
+
+      const downBtn = document.createElement("button");
+      downBtn.type = "button";
+      downBtn.className = "subject-row__btn";
+      downBtn.setAttribute("aria-label", "Move down");
+      downBtn.disabled = (i === state.subjects.length - 1);
+      downBtn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+      downBtn.addEventListener("click", function () {
+        if (i === state.subjects.length - 1) return;
+        const tmp = state.subjects[i + 1];
+        state.subjects[i + 1] = state.subjects[i];
+        state.subjects[i] = tmp;
+        renderSubjects();
+      });
+
+      const delBtn = document.createElement("button");
+      delBtn.type = "button";
+      delBtn.className = "subject-row__btn subject-row__btn--danger";
+      delBtn.setAttribute("aria-label", "Remove subject");
+      delBtn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>';
+      delBtn.addEventListener("click", function () {
+        state.subjects.splice(i, 1);
+        renderSubjects();
+      });
+
+      actions.appendChild(upBtn);
+      actions.appendChild(downBtn);
+      actions.appendChild(delBtn);
+
+      row.appendChild(indexEl);
+      row.appendChild(inputEl);
+      row.appendChild(impEl);
+      row.appendChild(actions);
+      list.appendChild(row);
+    });
+  }
+
+  function initSubjects() {
+    const addBtn = $("#addSubjectBtn");
+    if (!addBtn) return;
+    addBtn.addEventListener("click", function () {
+      // Default importance based on position
+      var defaults = ["Primary", "Secondary", "Tertiary", "Background"];
+      var imp = defaults[state.subjects.length] || "Background";
+      state.subjects.push({
+        id: makeSubjectId(),
+        text: "",
+        importance: imp
+      });
+      renderSubjects();
+      // Focus the just-added input
+      setTimeout(function () {
+        const inputs = $all(".subject-row__input");
+        if (inputs.length) inputs[inputs.length - 1].focus();
+      }, 0);
+    });
+    renderSubjects();
+  }
+
   /* ===========================================================
      Aspect ratio grid
      =========================================================== */
@@ -551,6 +732,16 @@
     result.id = History.makeId();
     state.lastResult = result;
     renderOutput(result);
+
+    // Issue #9 — Auto-translation feedback: if any user-entered text was
+    // translated to Indonesian, surface that in a toast.
+    var translationNote = detectTranslationInState(state);
+    if (translationNote) {
+      toast(translationNote, "success");
+    } else {
+      toast("Prompt generated & saved to history.", "success");
+    }
+
     // Auto-save to history
     History.addToHistory({
       id: result.id,
@@ -561,7 +752,33 @@
     });
     renderHistory();
     renderFavorites();
-    toast("Prompt generated & saved to history.", "success");
+  }
+
+  /* Walks user-entered text fields and reports if any were translated. */
+  function detectTranslationInState(s) {
+    var messages = [];
+    (s.subjects || []).forEach(function (subj, i) {
+      if (subj.text && subj.text.trim()) {
+        var r = D.translateToIndonesian(subj.text);
+        if (r.changed && r.translated !== subj.text) {
+          messages.push("Subject " + (i + 1) + " translated to Indonesian");
+        }
+      }
+    });
+    if (s.additionalDescription && s.additionalDescription.trim()) {
+      var r2 = D.translateToIndonesian(s.additionalDescription);
+      if (r2.changed && r2.translated !== s.additionalDescription) {
+        messages.push("Additional description translated");
+      }
+    }
+    if (s.watermarkText && s.watermarkText.trim()) {
+      var r3 = D.translateToIndonesian(s.watermarkText);
+      if (r3.changed && r3.translated !== s.watermarkText) {
+        messages.push("Watermark text translated");
+      }
+    }
+    if (messages.length === 0) return null;
+    return messages.join("; ") + ". Prompt generated & saved.";
   }
 
   function doClear() {
@@ -572,8 +789,8 @@
   }
 
   function doResetAll() {
-    // Reset everything to defaults
-    state.subjectText = "";
+    // Reset everything to EMPTY (Issue #1)
+    state.subjects = [];
     state.subjectImages = [];
     state.artStyle = null; state.artStyleCustom = "";
     state.cameraAngle = null; state.cameraAngleCustom = "";
@@ -583,45 +800,40 @@
     state.mood = null; state.moodCustom = "";
     state.typography = null; state.typographyCustom = "";
     state.effects = [];
+    state.customEffects = "";
+    state.watermarkPosition = null;
+    state.watermarkCustomPosition = "";
+    state.watermarkText = "";
     state.composition = null;
-    state.colors = ["#3B82F6"];
+    state.colors = [];
     state.colorMode = "single";
-    state.projectTypeCategory = "Gaming";
-    state.projectTypePreset = "Minecraft";
+    state.projectTypeCategory = null;
+    state.projectTypePreset = null;
     state.projectTypeCustom = "";
-    state.aspectRatio = "16:9";
-    state.renderingQuality = "High";
-    state.promptExpansion = "Detailed";
-    state.aiPreset = "ChatGPT Images";
+    state.aspectRatio = null;
+    state.customResolution = "";
+    state.renderingQuality = null;
+    state.promptExpansion = null;
+    state.aiPreset = null;
+    state.additionalDescription = "";
     state.lastResult = null;
 
     // Reset UI
     Object.keys(combos).forEach(function (k) {
       if (combos[k] && combos[k].clear) combos[k].clear();
     });
-    $all("input[type=text], textarea").forEach(function (el) {
+    $all("input[type=text], input[type=tel], textarea, select").forEach(function (el) {
       if (!el.closest(".combobox")) el.value = "";
     });
     $all(".chip").forEach(function (c) { c.classList.remove("is-active"); });
+    $all(".ratio").forEach(function (r) { r.classList.remove("is-active"); });
     $all(".preview").forEach(function (p) { p.remove(); });
 
-    // Re-apply defaults to UI
-    if (combos.projectTypeCategory) combos.projectTypeCategory.setValue("Gaming");
-    setTimeout(function () {
-      if (combos.projectTypePreset) combos.projectTypePreset.setValue("Minecraft");
-    }, 50);
-    initAspectRatios();
-    // Re-activate default chips
-    $all("#renderingGrid .chip[data-value='High']").forEach(function (c) { c.classList.add("is-active"); });
-    state.renderingQuality = "High";
-    $all("#expansionGrid .chip[data-value='Detailed']").forEach(function (c) { c.classList.add("is-active"); });
-    state.promptExpansion = "Detailed";
-    $all("#aiPresetGrid .chip[data-value='ChatGPT Images']").forEach(function (c) { c.classList.add("is-active"); });
-    state.aiPreset = "ChatGPT Images";
+    renderSubjects();
     initColorPalette();
 
     renderOutput(null);
-    toast("All fields reset to defaults.");
+    toast("All fields cleared.");
   }
 
   /* ===========================================================
@@ -774,14 +986,18 @@
     if (state.typography && combos.typography) combos.typography.setValue(state.typography);
 
     const textMap = {
-      "projectType-custom": "projectTypeCustom",
-      "subject-text": "subjectText",
-      "artStyle-custom": "artStyleCustom",
-      "cameraAngle-custom": "cameraAngleCustom",
-      "lighting-custom": "lightingCustom",
-      "background-custom": "backgroundCustom",
-      "mood-custom": "moodCustom",
-      "typography-custom": "typographyCustom"
+      "projectType-custom":      "projectTypeCustom",
+      "artStyle-custom":         "artStyleCustom",
+      "cameraAngle-custom":      "cameraAngleCustom",
+      "lighting-custom":         "lightingCustom",
+      "background-custom":       "backgroundCustom",
+      "mood-custom":             "moodCustom",
+      "typography-custom":       "typographyCustom",
+      "effects-custom":          "customEffects",
+      "watermark-custom-pos":    "watermarkCustomPosition",
+      "watermark-text":          "watermarkText",
+      "custom-resolution":       "customResolution",
+      "additional-desc":         "additionalDescription"
     };
     Object.keys(textMap).forEach(function (id) {
       const el = document.getElementById(id);
@@ -793,11 +1009,12 @@
       $all(".chip", grid).forEach(function (chip) { chip.classList.remove("is-active"); });
     });
     const activeChips = [
-      { grid: "effectsGrid", values: state.effects },
-      { grid: "compositionGrid", values: state.composition ? [state.composition] : [] },
-      { grid: "renderingGrid", values: state.renderingQuality ? [state.renderingQuality] : [] },
-      { grid: "expansionGrid", values: state.promptExpansion ? [state.promptExpansion] : [] },
-      { grid: "aiPresetGrid", values: state.aiPreset ? [state.aiPreset] : [] }
+      { grid: "effectsGrid",       values: state.effects },
+      { grid: "compositionGrid",   values: state.composition ? [state.composition] : [] },
+      { grid: "renderingGrid",     values: state.renderingQuality ? [state.renderingQuality] : [] },
+      { grid: "expansionGrid",     values: state.promptExpansion ? [state.promptExpansion] : [] },
+      { grid: "aiPresetGrid",      values: state.aiPreset ? [state.aiPreset] : [] },
+      { grid: "watermarkPosGrid",  values: state.watermarkPosition ? [state.watermarkPosition] : [] }
     ];
     activeChips.forEach(function (g) {
       const grid = document.getElementById(g.grid);
@@ -812,6 +1029,9 @@
     $all("#ratioGrid .ratio").forEach(function (r) {
       r.classList.toggle("is-active", r.dataset.value === state.aspectRatio);
     });
+
+    // Subjects
+    renderSubjects();
 
     // Color palette: rebuild via re-init
     initColorPalette();
@@ -948,6 +1168,8 @@
     initExpansion();
     initAiPreset();
     initAspectRatios();
+    initWatermarkPosition();   // Issue #8
+    initSubjects();            // Issue #10
     initDropzone("subject-dropzone", "subject-file", "subject-previews", "subjectImages");
     initDropzone("background-dropzone", "background-file", "background-previews", "backgroundImages");
     wireButtons();

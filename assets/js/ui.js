@@ -72,20 +72,20 @@
     });
   }
 
-  /* On mobile, auto-collapse all sections except the first */
+  /* Auto-collapse all sections except the first.
+     Applies on both mobile (<=640px) and desktop (>=1025px) so the
+     generator panel stays compact. Tablet (641-1024px) keeps all open. */
   function applyMobileAccordion() {
-    if (window.matchMedia('(max-width: 640px)').matches) {
-      const sections = document.querySelectorAll('.field-block[data-section]');
-      sections.forEach((block, i) => {
-        const header = block.querySelector('.section-header');
-        if (!header) return;
-        if (i === 0) {
-          header.setAttribute('aria-expanded', 'true');
-        } else {
-          header.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
+    const isMobile = window.matchMedia('(max-width: 640px)').matches;
+    const isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+    if (!isMobile && !isDesktop) return;
+
+    const sections = document.querySelectorAll('.field-block[data-section]');
+    sections.forEach((block, i) => {
+      const header = block.querySelector('.section-header');
+      if (!header) return;
+      header.setAttribute('aria-expanded', i === 0 ? 'true' : 'false');
+    });
   }
 
   /* ---------- Dropzone ---------- */

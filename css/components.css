@@ -514,8 +514,6 @@
   font-family: var(--font-sans);
   font-size: 13px;
   font-style: normal;
-  display: block;
-  text-align: left;
 }
 .output__placeholder strong { color: var(--accent); }
 

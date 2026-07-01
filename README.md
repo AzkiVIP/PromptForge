@@ -140,3 +140,7 @@ MIT License — see [LICENSE](https://github.com/AzkiVIP/PromptForge/blob/main/L
 [https://github.com/AzkiVIP/PromptForge](https://github.com/AzkiVIP/PromptForge)
 
 Built with HTML, CSS &amp; Vanilla JavaScript.
+
+## Credits
+
+Created by AzkiVIP  <img src="https://i.imgur.com/NBQvF2T.png" width="16">.
